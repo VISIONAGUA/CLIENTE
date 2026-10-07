@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#051428">
-<title>Vision Água</title>
+<title>VISION · Sistema de Pagamento</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--navy-900:#03101e;--navy-800:#051428;--navy-700:#082038;--navy-600:#0a2a4a;--cyan:#00DDFF;--green:#00E676;--red:#FF4757;--yellow:#FFC857;--pink:#FF6B9D;--purple:#A78BFA;--text:#FFFFFF;--text-2:#B0C4DE;--text-3:#5A7A9A;--border:#ffffff12;--border-2:#ffffff20}
+:root{--navy-900:#03101e;--navy-800:#051428;--navy-700:#082038;--navy-600:#0a2a4a;--cyan:#00DDFF;--green:#00E676;--red:#FF4757;--yellow:#FFC857;--purple:#A78BFA;--pink:#FF6B9D;--text:#FFFFFF;--text-2:#B0C4DE;--text-3:#5A7A9A;--border:#ffffff12;--border-2:#ffffff20}
 html,body{height:100%}
 body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;background:var(--navy-900);color:var(--text);overflow-x:hidden;font-size:15px;-webkit-font-smoothing:antialiased}
 button,input,select{font-family:inherit;font-size:inherit;color:inherit}
@@ -15,18 +15,171 @@ button{cursor:pointer;background:none;border:none;padding:0}
 input{outline:none;background:none;border:none}
 svg{display:block}
 
-#splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at top,#0a2a4a,#051428 60%,#03101e);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+/* ==================== SPLASH PREMIUM ==================== */
+#splash{
+  position:fixed;inset:0;z-index:9999;
+  background:radial-gradient(ellipse at 50% 20%,#0a2a4a 0%,#051428 45%,#020810 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .8s cubic-bezier(.4,0,.2,1),visibility .8s;
+  overflow:hidden;
+}
 #splash.hide{opacity:0;visibility:hidden}
-.sp-logo{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#00DDFF,#00E676);display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px #00ddff55;animation:popIn .9s cubic-bezier(.34,1.56,.64,1)}
-.sp-logo svg{width:56px;height:56px}
-.sp-title{font-size:32px;font-weight:900;letter-spacing:3px;margin-top:24px;background:linear-gradient(90deg,#fff,#00DDFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:slideUp .8s .3s backwards}
-.sp-sub{color:var(--text-3);font-size:12px;letter-spacing:4px;margin-top:6px;animation:slideUp .8s .45s backwards}
-.sp-loader{margin-top:48px;width:140px;height:3px;background:#ffffff10;border-radius:2px;overflow:hidden;animation:slideUp .8s .6s backwards}
-.sp-loader::after{content:'';display:block;height:100%;width:50%;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:loading 1.3s infinite}
-@keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
-@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes loading{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
 
+/* Partículas de fundo */
+.splash-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.splash-particles span{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:#00ddff;opacity:0;
+  animation:particleFloat 8s infinite linear;
+}
+.splash-particles span:nth-child(1){left:15%;top:30%;animation-delay:0s}
+.splash-particles span:nth-child(2){left:75%;top:60%;animation-delay:1.5s}
+.splash-particles span:nth-child(3){left:45%;top:15%;animation-delay:3s}
+.splash-particles span:nth-child(4){left:85%;top:25%;animation-delay:4.5s}
+.splash-particles span:nth-child(5){left:25%;top:75%;animation-delay:6s}
+.splash-particles span:nth-child(6){left:65%;top:85%;animation-delay:2.5s}
+@keyframes particleFloat{
+  0%{opacity:0;transform:translateY(0) scale(1)}
+  20%{opacity:1}
+  80%{opacity:1}
+  100%{opacity:0;transform:translateY(-100px) scale(1.5)}
+}
+
+/* Container central do logo */
+.splash-core{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  animation:splashFadeUp 1s cubic-bezier(.2,.9,.2,1) both;
+}
+@keyframes splashFadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
+}
+
+/* Logo V premium */
+.splash-logo{
+  position:relative;
+  width:120px;height:120px;border-radius:32px;
+  background:linear-gradient(135deg,#00DDFF 0%,#0080FF 50%,#00E676 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:
+    0 0 60px #00ddff55,
+    0 0 120px #00ddff22,
+    0 20px 60px #00000080,
+    inset 0 -8px 30px #00000040,
+    inset 0 4px 20px #ffffff30;
+  animation:logoAppear 1.2s cubic-bezier(.34,1.56,.64,1) both;
+  overflow:hidden;
+}
+@keyframes logoAppear{
+  0%{transform:scale(0) rotate(-45deg);opacity:0}
+  60%{transform:scale(1.1) rotate(5deg)}
+  100%{transform:scale(1) rotate(0);opacity:1}
+}
+
+/* Brilho passando pelo logo */
+.splash-logo::after{
+  content:'';position:absolute;
+  top:-50%;left:-50%;
+  width:200%;height:200%;
+  background:linear-gradient(115deg,transparent 30%,#ffffff90 50%,transparent 70%);
+  animation:logoShine 2.5s ease-in-out infinite;
+  animation-delay:1.2s;
+}
+@keyframes logoShine{
+  0%{transform:translateX(-100%) translateY(-100%) rotate(0)}
+  100%{transform:translateX(100%) translateY(100%) rotate(0)}
+}
+
+.splash-logo svg{
+  width:60px;height:60px;
+  filter:drop-shadow(0 2px 8px #00000050);
+  z-index:1;position:relative;
+}
+
+/* Anel pulsante ao redor do logo */
+.splash-ring{
+  position:absolute;
+  width:120px;height:120px;border-radius:32px;
+  border:2px solid #00ddff;
+  opacity:0;
+  animation:ringPulse 3s ease-out infinite;
+  animation-delay:1.5s;
+}
+.splash-ring:nth-child(2){animation-delay:1.5s}
+.splash-ring:nth-child(3){animation-delay:2.3s}
+@keyframes ringPulse{
+  0%{transform:scale(1);opacity:.6}
+  100%{transform:scale(1.8);opacity:0}
+}
+
+/* Nome VISION */
+.splash-title{
+  font-size:52px;font-weight:900;letter-spacing:6px;
+  margin-top:40px;
+  background:linear-gradient(180deg,#fff 0%,#00DDFF 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  text-align:center;
+  animation:titleAppear .9s .4s cubic-bezier(.2,.9,.2,1) both;
+  font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;
+}
+@keyframes titleAppear{
+  from{opacity:0;letter-spacing:20px;transform:translateY(10px)}
+  to{opacity:1;letter-spacing:6px;transform:none}
+}
+
+/* Linha decorativa */
+.splash-line{
+  width:0;height:2px;margin-top:16px;
+  background:linear-gradient(90deg,transparent,#00DDFF,transparent);
+  border-radius:2px;
+  animation:lineExpand 1s 1.2s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes lineExpand{
+  from{width:0;opacity:0}
+  to{width:200px;opacity:1}
+}
+
+/* Slogan */
+.splash-sub{
+  color:var(--text-2);font-size:13px;letter-spacing:3px;
+  margin-top:18px;font-weight:500;
+  text-align:center;
+  text-transform:uppercase;
+  animation:sloganAppear .9s 1.5s cubic-bezier(.2,.9,.2,1) both;
+  max-width:280px;line-height:1.6;
+}
+@keyframes sloganAppear{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+/* Barra de progresso */
+.splash-loader{
+  position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+  width:160px;height:3px;
+  background:#ffffff10;border-radius:2px;overflow:hidden;
+  animation:sloganAppear .6s 1.8s both;
+}
+.splash-loader::after{
+  content:'';display:block;height:100%;width:40%;
+  background:linear-gradient(90deg,transparent,#00DDFF,#00E676,transparent);
+  animation:loadingBar 1.6s infinite ease-in-out;
+}
+@keyframes loadingBar{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(350%)}
+}
+
+/* Versão no canto inferior */
+.splash-version{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  font-size:10px;color:var(--text-3);letter-spacing:2px;
+  animation:sloganAppear .5s 2.2s both;
+}
+
+/* ==================== SCREENS ==================== */
 .screen{display:none;min-height:100vh;max-width:520px;margin:0 auto;background:radial-gradient(ellipse at top,#082038,#051428 55%,#03101e);position:relative}
 .screen.active{display:block;animation:screenIn .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes screenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -34,16 +187,16 @@ svg{display:block}
 .btn{width:100%;padding:18px;border-radius:16px;font-weight:700;font-size:15px;letter-spacing:.3px;transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn:active{transform:scale(.98)}
 .btn-primary{background:linear-gradient(135deg,#00DDFF,#00a8c4);color:var(--navy-900);box-shadow:0 8px 24px #00ddff30}
-.btn-primary:disabled{opacity:.5;box-shadow:none}
 .btn-secondary{background:#ffffff10;color:var(--text);border:1.5px solid var(--border-2);backdrop-filter:blur(10px)}
 .btn-danger{background:#ff475720;color:var(--red);border:1.5px solid #ff475740}
 
+/* AUTH */
 .auth-screen{display:flex;flex-direction:column;min-height:100vh;padding:32px 24px 24px}
 .auth-top{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:40px}
-.auth-logo{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,#00DDFF,#00E676);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px #00ddff40;margin-bottom:20px}
+.auth-logo{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,#00DDFF,#0080FF,#00E676);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px #00ddff40;margin-bottom:20px}
 .auth-logo svg{width:40px;height:40px}
 .auth-title{font-size:26px;font-weight:800;letter-spacing:-.5px}
-.auth-sub{color:var(--text-2);font-size:13px;margin-top:4px;letter-spacing:1px}
+.auth-sub{color:var(--text-2);font-size:12px;margin-top:4px;letter-spacing:2.5px;text-transform:uppercase}
 .auth-form{flex-shrink:0}
 .input-group{margin-bottom:14px}
 .input-label{display:block;font-size:11px;color:var(--text-2);margin-bottom:6px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
@@ -56,8 +209,12 @@ svg{display:block}
 .input-toggle{padding:8px;margin-right:-8px;color:var(--text-3);display:flex}
 .input-toggle svg{width:20px;height:20px}
 .auth-footer{text-align:center;color:var(--text-2);font-size:13px;margin-top:22px}
-.auth-footer a{color:var(--cyan);text-decoration:none;font-weight:600}
+.auth-footer a{color:var(--cyan);text-decoration:none;font-weight:600;cursor:pointer}
+.debug-box{margin-top:16px;padding:12px;background:#00000040;border:1px dashed #ffc85740;border-radius:10px;font-size:11px;color:var(--text-3);display:none;font-family:ui-monospace,monospace;line-height:1.5}
+.debug-box.show{display:block}
+.debug-box strong{color:var(--yellow)}
 
+/* MODAIS */
 .modal-overlay{position:fixed;inset:0;background:#00000080;backdrop-filter:blur(8px);z-index:1000;display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.active{display:flex;animation:fadeIn .2s}
 .modal{width:100%;max-width:520px;background:radial-gradient(ellipse at top,#0a2a4a,#051428);border-top-left-radius:28px;border-top-right-radius:28px;max-height:92vh;overflow-y:auto;animation:modalIn .35s cubic-bezier(.2,.8,.2,1);border-top:1px solid #00ddff30}
@@ -68,20 +225,21 @@ svg{display:block}
 .modal-head h2{font-size:20px;font-weight:800}
 .modal-close{width:36px;height:36px;border-radius:50%;background:#ffffff10;display:flex;align-items:center;justify-content:center;color:var(--text-2)}
 .modal-body{padding:16px 24px 24px}
+.modal-text{font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px}
 
+/* APP */
 .app-header{display:flex;justify-content:space-between;align-items:center;padding:20px 20px 12px;position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#082038ee,#08203800);backdrop-filter:blur(20px)}
 .user-chip{display:flex;align-items:center;gap:12px}
-.user-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#00DDFF,#00E676);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy-900);font-size:16px;flex-shrink:0;box-shadow:0 4px 12px #00ddff30;cursor:pointer;transition:.2s;border:2px solid transparent}
-.user-avatar:hover{border-color:#00ddff60}
+.user-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#00DDFF,#0080FF,#00E676);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy-900);font-size:16px;flex-shrink:0;box-shadow:0 4px 12px #00ddff30;cursor:pointer;transition:.2s;border:2px solid transparent}
 .user-info .hi{font-size:11px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase}
 .user-info .name{font-size:15px;font-weight:700;margin-top:2px}
-.icon-btn{width:42px;height:42px;border-radius:14px;background:#ffffff10;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-2);transition:.2s}
+.icon-btn{width:42px;height:42px;border-radius:14px;background:#ffffff10;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-2)}
 .icon-btn svg{width:20px;height:20px}
 
 .menu-dropdown{position:fixed;top:70px;left:20px;z-index:500;background:linear-gradient(180deg,#0e3a63,#082038);border:1px solid #00ddff30;border-radius:16px;box-shadow:0 20px 60px #00000080;min-width:240px;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(-10px) scale(.95);transition:.2s cubic-bezier(.2,.9,.2,1);transform-origin:top left}
 .menu-dropdown.active{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
 .menu-header{padding:16px 18px;border-bottom:1px solid #ffffff10;display:flex;align-items:center;gap:12px}
-.menu-header-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00DDFF,#00E676);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy-900);font-size:15px;flex-shrink:0}
+.menu-header-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00DDFF,#0080FF,#00E676);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy-900);font-size:15px;flex-shrink:0}
 .menu-header-info{flex:1;min-width:0}
 .menu-header-info .n{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .menu-header-info .e{font-size:11px;color:var(--text-3);margin-top:2px}
@@ -106,14 +264,7 @@ svg{display:block}
 .bal-stat .k{font-size:10px;color:#B0C4DE;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
 .bal-stat .v{font-size:14px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
 
-/* BANNER DE PROMOÇÃO */
-.promo-banner{
-  margin:0 20px 16px;padding:18px 20px;border-radius:18px;
-  background:linear-gradient(135deg,#FF6B9D,#FFC857);
-  color:#03101e;position:relative;overflow:hidden;
-  box-shadow:0 8px 24px #ff6b9d40;
-  cursor:pointer;transition:.2s;
-}
+.promo-banner{margin:0 20px 16px;padding:18px 20px;border-radius:18px;background:linear-gradient(135deg,#FF6B9D,#FFC857);color:#03101e;position:relative;overflow:hidden;box-shadow:0 8px 24px #ff6b9d40;cursor:pointer;transition:.2s}
 .promo-banner:active{transform:scale(.98)}
 .promo-banner::before{content:'';position:absolute;top:-50%;right:-20%;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,#ffffff50,transparent 70%);pointer-events:none}
 .promo-banner .badge{display:inline-flex;align-items:center;gap:6px;background:#03101e;color:#FFC857;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
@@ -122,19 +273,8 @@ svg{display:block}
 .promo-banner .sub{font-size:12px;opacity:.75;margin-top:6px;font-weight:600}
 .promo-banner .cta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;position:relative;z-index:1}
 
-/* CASHBACK MINI CARD */
-.cashback-mini{
-  margin:0 20px 16px;padding:16px 20px;border-radius:18px;
-  background:linear-gradient(135deg,#A78BFA20,#00E67620);
-  border:1px solid #A78BFA40;
-  display:flex;align-items:center;gap:14px;
-}
-.cashback-mini .ico{
-  width:44px;height:44px;border-radius:14px;flex-shrink:0;
-  background:linear-gradient(135deg,#A78BFA,#00E676);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--navy-900);
-}
+.cashback-mini{margin:0 20px 16px;padding:16px 20px;border-radius:18px;background:linear-gradient(135deg,#A78BFA20,#00E67620);border:1px solid #A78BFA40;display:flex;align-items:center;gap:14px}
+.cashback-mini .ico{width:44px;height:44px;border-radius:14px;flex-shrink:0;background:linear-gradient(135deg,#A78BFA,#00E676);display:flex;align-items:center;justify-content:center;color:var(--navy-900)}
 .cashback-mini .ico svg{width:22px;height:22px}
 .cashback-mini .info{flex:1}
 .cashback-mini .info .lbl{font-size:10px;color:var(--purple);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
@@ -150,7 +290,7 @@ svg{display:block}
 .section{padding:0 20px 20px}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .section-head h3{font-size:16px;font-weight:800;letter-spacing:-.2px}
-.section-head a{font-size:12px;color:var(--cyan);font-weight:600;text-decoration:none}
+.section-head a{font-size:12px;color:var(--cyan);font-weight:600;text-decoration:none;cursor:pointer}
 
 .tx-item{display:flex;align-items:center;gap:14px;padding:14px;border-radius:16px;background:#ffffff06;border:1px solid #ffffff08;margin-bottom:8px;transition:.15s;cursor:pointer}
 .tx-item:active{background:#ffffff10}
@@ -174,7 +314,7 @@ svg{display:block}
 .empty p{font-size:12px;color:var(--text-3)}
 
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:100;background:#051428e6;backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 8px max(14px,env(safe-area-inset-bottom))}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 4px;color:var(--text-3);transition:.2s;position:relative}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 4px;color:var(--text-3);transition:.2s;position:relative;cursor:pointer}
 .nav-item svg{width:22px;height:22px}
 .nav-item .lbl{font-size:10px;font-weight:600;letter-spacing:.3px}
 .nav-item.active{color:var(--cyan)}
@@ -190,15 +330,6 @@ svg{display:block}
 .amount-card.selected{border-color:var(--cyan);background:#00ddff10;box-shadow:0 0 0 4px #00ddff15,0 8px 24px #00ddff20}
 .amount-card .v{font-size:24px;font-weight:800;letter-spacing:-.5px}
 .amount-card .s{font-size:11px;color:var(--text-2);margin-top:6px;letter-spacing:.5px}
-.amount-card .bonus-tag{
-  position:absolute;top:-8px;right:-8px;
-  background:linear-gradient(135deg,#FF6B9D,#FFC857);
-  color:#03101e;padding:3px 9px;border-radius:12px;
-  font-size:10px;font-weight:800;letter-spacing:.5px;
-  box-shadow:0 4px 12px #ff6b9d60;
-  animation:pulseTag 2s infinite;
-}
-@keyframes pulseTag{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 
 .pix-preview{background:#ffffff06;border:1px dashed #ffffff20;border-radius:16px;padding:18px;margin-top:20px}
 .pix-preview .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px}
@@ -207,17 +338,16 @@ svg{display:block}
 .pix-preview .row.bonus .v{color:var(--yellow)}
 .pix-preview .row.total{border-top:1px solid #ffffff15;margin-top:8px;padding-top:12px;font-size:17px}
 .pix-preview .row.total .v{color:var(--cyan);font-size:20px;font-weight:800}
-.pix-preview .empty-note{text-align:center;font-size:11px;color:var(--text-3);margin-top:6px}
 
 .filter-bar{display:flex;gap:8px;padding:0 20px 16px;overflow-x:auto;scrollbar-width:none}
 .filter-bar::-webkit-scrollbar{display:none}
-.filter-chip{padding:10px 18px;border-radius:20px;flex-shrink:0;background:#ffffff08;border:1px solid var(--border);color:var(--text-2);font-size:13px;font-weight:600;transition:.2s}
+.filter-chip{padding:10px 18px;border-radius:20px;flex-shrink:0;background:#ffffff08;border:1px solid var(--border);color:var(--text-2);font-size:13px;font-weight:600;transition:.2s;cursor:pointer}
 .filter-chip.active{background:var(--cyan);color:var(--navy-900);border-color:var(--cyan)}
 .date-group{margin-bottom:20px}
 .date-group .dg-head{font-size:11px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:0 20px 10px}
 
 .profile-hero{padding:32px 20px;text-align:center;background:radial-gradient(ellipse at top,#0e3a6355,transparent 70%)}
-.profile-avatar{width:88px;height:88px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,#00DDFF,#00E676);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:var(--navy-900);box-shadow:0 12px 32px #00ddff30}
+.profile-avatar{width:88px;height:88px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,#00DDFF,#0080FF,#00E676);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:var(--navy-900);box-shadow:0 12px 32px #00ddff30}
 .profile-name{font-size:20px;font-weight:800}
 .profile-sub{font-size:13px;color:var(--text-2);margin-top:4px}
 .profile-stats{display:flex;justify-content:space-around;margin-top:24px;padding:16px;background:#ffffff06;border-radius:18px;border:1px solid var(--border)}
@@ -232,13 +362,7 @@ svg{display:block}
 .menu-title{font-size:14px;font-weight:700}
 .menu-sub{font-size:12px;color:var(--text-3);margin-top:2px}
 
-/* CASHBACK SCREEN */
-.cb-hero{
-  margin:8px 20px 20px;padding:28px 24px;border-radius:24px;
-  background:linear-gradient(135deg,#A78BFA,#00E676);
-  color:var(--navy-900);position:relative;overflow:hidden;
-  box-shadow:0 12px 40px #A78BFA40;
-}
+.cb-hero{margin:8px 20px 20px;padding:28px 24px;border-radius:24px;background:linear-gradient(135deg,#A78BFA,#00E676);color:var(--navy-900);position:relative;overflow:hidden;box-shadow:0 12px 40px #A78BFA40}
 .cb-hero::before{content:'';position:absolute;top:-30%;right:-10%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#ffffff50,transparent 70%);pointer-events:none}
 .cb-hero .lbl{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:.75;position:relative;z-index:1}
 .cb-hero .val{font-size:44px;font-weight:900;letter-spacing:-1.5px;margin-top:8px;position:relative;z-index:1;font-variant-numeric:tabular-nums}
@@ -289,8 +413,6 @@ svg{display:block}
 .pix-timer .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .pix-status-badge{display:inline-flex;align-items:center;gap:8px;background:#00ddff15;color:var(--cyan);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.5px;margin:12px 0}
-
-/* PIX PREVIEW NO MODAL */
 .pix-preview-box{background:#ffffff06;border:1px solid #ffffff12;border-radius:14px;padding:16px;margin:12px 0}
 .pix-preview-box .row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px}
 .pix-preview-box .row .k{color:var(--text-2)}
@@ -299,7 +421,6 @@ svg{display:block}
 .pix-preview-box .row.total{border-top:1px solid #ffffff15;padding-top:10px;margin-top:6px}
 .pix-preview-box .row.total .v{color:var(--cyan);font-size:17px;font-weight:800}
 
-/* SUCESSO */
 .pix-success{text-align:center;padding:20px 24px}
 .pix-success-circle{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,#00e67630,transparent 70%);display:flex;align-items:center;justify-content:center;color:var(--green);margin:0 auto 20px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1)}
 .pix-success-circle svg{width:56px;height:56px}
@@ -317,56 +438,131 @@ svg{display:block}
 </head>
 <body>
 
+<!-- ==================== SPLASH PREMIUM ==================== -->
 <div id="splash">
-  <div class="sp-logo"><svg viewBox="0 0 24 24" fill="#051428"><path d="M12 2.5C12 2.5 5 10 5 15a7 7 0 0 0 14 0c0-5-7-12.5-7-12.5z"/></svg></div>
-  <div class="sp-title">VISION ÁGUA</div>
-  <div class="sp-sub">RECARGA INTELIGENTE</div>
-  <div class="sp-loader"></div>
+  <div class="splash-particles">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="splash-core">
+    <div style="position:relative">
+      <div class="splash-ring"></div>
+      <div class="splash-ring"></div>
+      <div class="splash-logo">
+        <svg viewBox="0 0 24 24" fill="#03101e">
+          <path d="M4 4L12 20L20 4" stroke="#03101e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="splash-title">VISION</div>
+    <div class="splash-line"></div>
+    <div class="splash-sub">Sistema de pagamento inteligente</div>
+  </div>
+
+  <div class="splash-loader"></div>
+  <div class="splash-version">v2.0 · Seguro · Rápido · Confiável</div>
 </div>
 
-<!-- LOGIN -->
+<!-- ==================== LOGIN ==================== -->
 <div class="screen" id="screen-login">
   <div class="auth-screen">
     <div class="auth-top">
-      <div class="auth-logo"><svg viewBox="0 0 24 24" fill="#051428"><path d="M12 2.5C12 2.5 5 10 5 15a7 7 0 0 0 14 0c0-5-7-12.5-7-12.5z"/></svg></div>
-      <div class="auth-title">Bem-vindo de volta</div>
-      <div class="auth-sub">Acesse sua conta Vision Água</div>
+      <div class="auth-logo">
+        <svg viewBox="0 0 24 24"><path d="M4 4L12 20L20 4" stroke="#03101e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </div>
+      <div class="auth-title">Bem-vindo</div>
+      <div class="auth-sub">Sistema de pagamento inteligente</div>
     </div>
     <div class="auth-form">
-      <div class="input-group"><label class="input-label">WhatsApp ou CPF</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 10h20"/></svg><input id="login-id" type="text" placeholder="(11) 99999-9999" inputmode="numeric"></div></div>
-      <div class="input-group"><label class="input-label">Senha</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="login-senha" type="password" placeholder="••••••••"><button class="input-toggle" onclick="togglePwd('login-senha',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
-      <button class="btn btn-primary" style="margin-top:8px" onclick="fazerLogin()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>Entrar</button>
-      <button class="btn btn-secondary" style="margin-top:10px" onclick="abrirCadastro()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>Criar conta</button>
-      <div class="auth-footer">Esqueceu a senha? <a href="#" onclick="toast('Em breve');return false">Recuperar acesso</a></div>
+      <div class="input-group">
+        <label class="input-label">CPF ou WhatsApp</label>
+        <div class="input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 10h20"/></svg>
+          <input id="login-id" type="text" placeholder="000.000.000-00" inputmode="numeric">
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Senha</label>
+        <div class="input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <input id="login-senha" type="password" placeholder="••••••••">
+          <button class="input-toggle" onclick="togglePwd('login-senha',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="margin-top:8px" onclick="fazerLogin()">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+        Entrar
+      </button>
+
+      <button class="btn btn-secondary" style="margin-top:10px" onclick="abrirCadastro()">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Criar conta
+      </button>
+
+      <div class="auth-footer">
+        Esqueceu a senha? <a onclick="abrirRecuperar()">Recuperar acesso</a>
+      </div>
+
+      <div class="debug-box" id="debug-login"></div>
     </div>
   </div>
 </div>
 
-<!-- CADASTRO -->
+<!-- ==================== MODAL CADASTRO ==================== -->
 <div class="modal-overlay" id="modal-cadastro">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-head"><h2>Criar conta</h2><button class="modal-close" onclick="fecharCadastro()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-head">
+      <h2>Criar conta</h2>
+      <button class="modal-close" onclick="fecharModal('modal-cadastro')"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
     <div class="modal-body">
       <div class="input-group"><label class="input-label">Nome completo</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 4-7 8-7s8 3 8 7"/></svg><input id="cad-nome" placeholder="João da Silva"></div></div>
       <div class="input-group"><label class="input-label">CPF</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4M7 11h6"/></svg><input id="cad-cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14"></div></div>
       <div class="input-group"><label class="input-label">WhatsApp</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><input id="cad-whats" placeholder="(11) 99999-9999" inputmode="numeric" maxlength="16"></div></div>
       <div class="input-group"><label class="input-label">Endereço completo</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><input id="cad-endereco" placeholder="Rua, número, bairro"></div></div>
-      <div class="input-group"><label class="input-label">Senha (mínimo 6)</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="cad-senha" type="password" placeholder="Crie uma senha forte"><button class="input-toggle" onclick="togglePwd('cad-senha',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
+      <div class="input-group"><label class="input-label">Senha (mínimo 6)</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="cad-senha" type="password" placeholder="Crie uma senha"><button class="input-toggle" onclick="togglePwd('cad-senha',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
       <button class="btn btn-primary" style="margin-top:8px" onclick="criarConta()">Criar minha conta</button>
-      <div class="auth-footer" style="margin-top:16px">Já tem conta? <a href="#" onclick="fecharCadastro();return false">Fazer login</a></div>
     </div>
   </div>
 </div>
 
-<!-- HOME -->
+<!-- ==================== MODAL RECUPERAR ==================== -->
+<div class="modal-overlay" id="modal-recuperar">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <h2>Recuperar acesso</h2>
+      <button class="modal-close" onclick="fecharModal('modal-recuperar')"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        Se você esqueceu a senha, precisamos resetar manualmente.<br><br>
+        <strong>Entre em contato:</strong><br>
+        📱 WhatsApp: (88) 99247-7625
+      </div>
+      <div class="input-group">
+        <label class="input-label">Digite seu CPF ou WhatsApp</label>
+        <div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 10h20"/></svg><input id="rec-id" placeholder="000.000.000-00" inputmode="numeric"></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:8px" onclick="pedirRecuperacao()">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Enviar pedido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HOME ==================== -->
 <div class="screen" id="screen-home">
   <div class="app-header">
     <div class="user-chip">
       <div class="user-avatar" id="home-avatar" onclick="toggleMenu(event)">V</div>
       <div class="user-info"><div class="hi">Olá,</div><div class="name" id="home-nome">Cliente</div></div>
     </div>
-    <div><button class="icon-btn" onclick="toast('Nenhuma notificação nova')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button></div>
+    <div><button class="icon-btn" onclick="toast('Nenhuma notificação')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button></div>
   </div>
   <div id="home-promo-container"></div>
   <div class="balance-card">
@@ -388,12 +584,12 @@ svg{display:block}
     <button class="qa" onclick="toast('Em breve')"><div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div><div class="qa-label">Enviar</div></button>
   </div>
   <div class="section">
-    <div class="section-head"><h3>Últimas movimentações</h3><a href="#" onclick="irPara('extrato');return false">Ver todas</a></div>
+    <div class="section-head"><h3>Últimas movimentações</h3><a onclick="irPara('extrato')">Ver todas</a></div>
     <div id="home-tx-list"></div>
   </div>
 </div>
 
-<!-- RECARGA -->
+<!-- ==================== RECARGA ==================== -->
 <div class="screen" id="screen-recarga">
   <div class="page-head">
     <button class="back-btn" onclick="irPara('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
@@ -402,10 +598,10 @@ svg{display:block}
   <div id="rec-promo-container"></div>
   <div class="section" style="padding-top:0">
     <div class="amount-grid" id="amount-grid">
-      <button class="amount-card" data-v="2.50" onclick="selRecarga(this, event)"><div class="v">R$ 2,50</div><div class="s">1 garrafão</div></button>
-      <button class="amount-card" data-v="5.00" onclick="selRecarga(this, event)"><div class="v">R$ 5,00</div><div class="s">2 garrafões</div></button>
-      <button class="amount-card" data-v="10.00" onclick="selRecarga(this, event)"><div class="v">R$ 10,00</div><div class="s">4 garrafões</div></button>
-      <button class="amount-card" data-v="25.00" onclick="selRecarga(this, event)"><div class="v">R$ 25,00</div><div class="s">10 garrafões</div></button>
+      <button class="amount-card" data-v="2.50" onclick="selRecarga(this, event)"><div class="v">R$ 2,50</div><div class="s">1 crédito</div></button>
+      <button class="amount-card" data-v="5.00" onclick="selRecarga(this, event)"><div class="v">R$ 5,00</div><div class="s">2 créditos</div></button>
+      <button class="amount-card" data-v="10.00" onclick="selRecarga(this, event)"><div class="v">R$ 10,00</div><div class="s">4 créditos</div></button>
+      <button class="amount-card" data-v="25.00" onclick="selRecarga(this, event)"><div class="v">R$ 25,00</div><div class="s">10 créditos</div></button>
     </div>
     <div class="input-group">
       <label class="input-label">Outro valor</label>
@@ -417,11 +613,10 @@ svg{display:block}
       <div class="row total"><span class="k">Vai receber</span><span class="v" id="rec-valor-receber">R$ 0,00</span></div>
     </div>
     <button class="btn btn-primary" style="margin-top:20px" onclick="gerarPix()" id="btn-pagar">Gerar PIX</button>
-    <div style="text-align:center;color:var(--text-3);font-size:12px;margin-top:14px">Você só será cobrado após confirmar o pagamento</div>
   </div>
 </div>
 
-<!-- CASHBACK -->
+<!-- ==================== CASHBACK ==================== -->
 <div class="screen" id="screen-cashback">
   <div class="page-head">
     <button class="back-btn" onclick="irPara('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
@@ -430,7 +625,7 @@ svg{display:block}
   <div class="cb-hero">
     <div class="lbl">Cashback acumulado</div>
     <div class="val" id="cb-total">R$ 0,00</div>
-    <div class="sub" id="cb-sub">Comece a recarregar pra ganhar</div>
+    <div class="sub" id="cb-sub">Comece a recarregar</div>
   </div>
   <div class="cb-breakdown">
     <div class="cb-card purple"><div class="k">Cashback padrão</div><div class="v" id="cb-padrao">R$ 0,00</div></div>
@@ -444,7 +639,7 @@ svg{display:block}
   </div>
 </div>
 
-<!-- EXTRATO -->
+<!-- ==================== EXTRATO ==================== -->
 <div class="screen" id="screen-extrato">
   <div class="page-head"><h1>Extrato</h1></div>
   <div class="filter-bar">
@@ -455,7 +650,7 @@ svg{display:block}
   <div class="section" style="padding-top:0"><div id="extrato-list"></div></div>
 </div>
 
-<!-- PERFIL -->
+<!-- ==================== PERFIL ==================== -->
 <div class="screen" id="screen-perfil">
   <div class="page-head"><h1>Perfil</h1></div>
   <div class="profile-hero">
@@ -465,7 +660,7 @@ svg{display:block}
     <div class="profile-stats">
       <div class="pstat"><div class="v" id="pf-saldo">R$ 0</div><div class="k">Saldo</div></div>
       <div class="pstat"><div class="v" id="pf-recargas">0</div><div class="k">Recargas</div></div>
-      <div class="pstat"><div class="v" id="pf-garrafoes">0</div><div class="k">Garrafões</div></div>
+      <div class="pstat"><div class="v" id="pf-garrafoes">0</div><div class="k">Créditos</div></div>
     </div>
   </div>
   <div class="menu-list">
@@ -495,15 +690,12 @@ svg{display:block}
 <div class="modal-overlay" id="modal-pix">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-head">
-      <h2 id="pix-titulo">Pagamento PIX</h2>
-      <button class="modal-close" onclick="fecharPix()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-    </div>
+    <div class="modal-head"><h2 id="pix-titulo">Pagamento PIX</h2><button class="modal-close" onclick="fecharPix()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
     <div id="pix-conteudo"></div>
   </div>
 </div>
 
-<!-- MODAL DETALHE TRANSAÇÃO -->
+<!-- MODAL TX -->
 <div class="modal-overlay" id="modal-tx">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -548,22 +740,35 @@ const db = getDatabase(app);
 const auth = getAuth(app);
 
 const BACKEND_URL = "https://vision-agua-backend.onrender.com";
+const WHATSAPP_SUPORTE = "5588992477625";
 
 let usuarioAtual = null, dadosCliente = null, unsubscribeCliente = null, unsubscribePromos = null;
 let filtroAtual = 'todos', recargaSelecionada = 0, saldoVisivel = true, menuAberto = false;
 let pixAtual = null, pixInterval = null, pixExpiraEm = 0;
 let promocaoAtiva = null, configCashback = null, previewAtual = null;
+let tentativasLogin = 0;
 
-// Ícones SVG (reaproveitáveis)
 const ICON_IN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>';
 const ICON_OUT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
 const ICON_GIFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>';
 
+// Splash
 setTimeout(()=>{
   document.getElementById('splash').classList.add('hide');
-  setTimeout(()=>document.getElementById('splash').style.display='none',700);
-}, 2400);
+  setTimeout(()=>document.getElementById('splash').style.display='none',800);
+}, 2800);
 
+// ============ NORMALIZAÇÃO (correção do bug de login) ============
+function normalizar(id){
+  return String(id || '').replace(/\D/g, '');  // só dígitos
+}
+
+function cpfParaEmail(id){
+  const digits = normalizar(id);
+  return digits + '@visionagua.app';
+}
+
+// ============ NAVEGAÇÃO ============
 window.irPara = function(tela){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const el = document.getElementById('screen-'+tela);
@@ -590,6 +795,7 @@ window.toast = function(msg, tipo){
 };
 window.showLoading = (msg)=> { document.getElementById('loading-txt').innerText = msg||'Carregando...'; document.getElementById('loading').classList.add('active'); };
 window.hideLoading = ()=> document.getElementById('loading').classList.remove('active');
+window.fecharModal = (id)=> document.getElementById(id).classList.remove('active');
 
 // Máscaras
 const maskCPF = v => v.replace(/\D/g,'').slice(0,11).replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
@@ -606,9 +812,8 @@ window.togglePwd = function(id, btn){
   btn.innerHTML = isPwd ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 };
 
+// ============ CADASTRO ============
 window.abrirCadastro = ()=> document.getElementById('modal-cadastro').classList.add('active');
-window.fecharCadastro = ()=> document.getElementById('modal-cadastro').classList.remove('active');
-const cpfParaEmail = c => c.replace(/\D/g,'') + '@visionagua.app';
 
 window.criarConta = async function(){
   const nome = document.getElementById('cad-nome').value.trim();
@@ -617,50 +822,128 @@ window.criarConta = async function(){
   const endereco = document.getElementById('cad-endereco').value.trim();
   const senha = document.getElementById('cad-senha').value;
   if(!nome || nome.length < 3) return toast('Digite seu nome completo','error');
-  if(cpf.replace(/\D/g,'').length !== 11) return toast('CPF inválido','error');
-  if(whats.replace(/\D/g,'').length < 10) return toast('WhatsApp inválido','error');
+  if(normalizar(cpf).length !== 11) return toast('CPF inválido','error');
+  if(normalizar(whats).length < 10) return toast('WhatsApp inválido','error');
   if(!endereco || endereco.length < 5) return toast('Digite seu endereço','error');
   if(senha.length < 6) return toast('Senha muito curta','error');
+
   showLoading('Criando sua conta...');
   try {
-    const cred = await createUserWithEmailAndPassword(auth, cpfParaEmail(cpf), senha);
-    await set(ref(db, 'clientes/' + cred.user.uid), { nome, cpf, whatsapp: whats, endereco, saldo: 0, criado_em: Math.floor(Date.now()/1000), ativo: true });
-    fecharCadastro(); toast('Conta criada com sucesso!','success');
+    const email = cpfParaEmail(cpf);
+    const cred = await createUserWithEmailAndPassword(auth, email, senha);
+    await set(ref(db, 'clientes/' + cred.user.uid), {
+      nome, cpf, whatsapp: whats, endereco, saldo: 0,
+      criado_em: Math.floor(Date.now()/1000),
+      ativo: true
+    });
+    fecharModal('modal-cadastro');
+    toast('Conta criada com sucesso!','success');
   } catch(e){
     let msg = 'Erro ao criar conta';
-    if(e.code === 'auth/email-already-in-use') msg = 'Este CPF já está cadastrado';
+    if(e.code === 'auth/email-already-in-use') msg = 'Este CPF já está cadastrado. Faça login.';
     else if(e.code === 'auth/weak-password') msg = 'Senha muito fraca';
+    else if(e.code === 'auth/invalid-email') msg = 'CPF inválido (formato)';
     toast(msg,'error');
+    console.error('Erro cadastro:', e.code, e.message);
   } finally { hideLoading(); }
 };
 
+// ============ LOGIN (com debug e correção) ============
 window.fazerLogin = async function(){
-  const id = document.getElementById('login-id').value.trim();
+  const idInput = document.getElementById('login-id').value.trim();
   const senha = document.getElementById('login-senha').value;
-  if(!id || !senha) return toast('Preencha todos os campos','error');
+  const debugBox = document.getElementById('debug-login');
+
+  if(!idInput || !senha){
+    return toast('Preencha todos os campos','error');
+  }
+
+  const digits = normalizar(idInput);
+  if(digits.length < 10){
+    return toast('Digite um CPF (11) ou WhatsApp (10-11) válido','error');
+  }
+
+  const email = cpfParaEmail(idInput);
+  console.log('🔐 Tentando login:', { idInput, digits, email, senhaLength: senha.length });
+
   showLoading('Entrando...');
-  try { await signInWithEmailAndPassword(auth, cpfParaEmail(id), senha); toast('Bem-vindo!','success'); }
-  catch(e){ let msg = 'Erro'; if(e.code === 'auth/user-not-found') msg = 'Conta não encontrada'; else if(e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential') msg = 'CPF ou senha incorretos'; toast(msg,'error'); }
-  finally { hideLoading(); }
+  try {
+    await signInWithEmailAndPassword(auth, email, senha);
+    tentativasLogin = 0;
+    debugBox.classList.remove('show');
+    toast('Bem-vindo!','success');
+  } catch(e){
+    tentativasLogin++;
+    console.error('Erro login:', e.code, e.message);
+
+    let msg = 'Erro ao entrar';
+    let dica = '';
+
+    if(e.code === 'auth/user-not-found'){
+      msg = 'Conta não encontrada';
+      dica = 'Este CPF/WhatsApp não tem cadastro. Clique em "Criar conta" abaixo.';
+    } else if(e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential'){
+      msg = 'Senha incorreta';
+      dica = 'Confira a senha. Se esqueceu, use "Recuperar acesso".';
+    } else if(e.code === 'auth/invalid-email'){
+      msg = 'Formato inválido';
+      dica = 'Digite só números no campo de CPF/WhatsApp.';
+    } else if(e.code === 'auth/too-many-requests'){
+      msg = 'Muitas tentativas';
+      dica = 'Aguarde 1 minuto e tente novamente.';
+    } else if(e.code === 'auth/network-request-failed'){
+      msg = 'Sem internet';
+      dica = 'Verifique sua conexão.';
+    }
+
+    toast(msg,'error');
+
+    // Mostra debug após 2 tentativas
+    if(tentativasLogin >= 2){
+      debugBox.innerHTML = `
+        <strong>🔍 Diagnóstico</strong><br>
+        E-mail tentado: <span style="color:var(--cyan)">${email}</span><br>
+        CPF/WhatsApp digitado: <span style="color:var(--cyan)">${digits}</span><br>
+        Erro: <span style="color:var(--red)">${e.code}</span><br><br>
+        <span style="color:var(--txt-2)">💡 ${dica}</span>
+      `;
+      debugBox.classList.add('show');
+    }
+  } finally { hideLoading(); }
 };
 
 window.sair = async function(){
   fecharMenu(); pararPixPolling();
   if(!confirm('Deseja sair da conta?')) return;
   showLoading('Saindo...');
-  try { await signOut(auth); toast('Até logo!','success'); } catch(e){ toast('Erro','error'); } finally { hideLoading(); }
+  try { await signOut(auth); toast('Até logo!','success'); }
+  catch(e){ toast('Erro','error'); }
+  finally { hideLoading(); }
 };
 
+window.abrirRecuperar = ()=> document.getElementById('modal-recuperar').classList.add('active');
+
+window.pedirRecuperacao = function(){
+  const id = document.getElementById('rec-id').value.trim();
+  if(!id) return toast('Digite seu CPF ou WhatsApp','error');
+  const msg = encodeURIComponent(`Olá! Esqueci minha senha do app VISION. Meu CPF/WhatsApp: ${id}`);
+  window.open(`https://wa.me/${WHATSAPP_SUPORTE}?text=${msg}`, '_blank');
+  fecharModal('modal-recuperar');
+};
+
+// ============ AUTH STATE ============
 onAuthStateChanged(auth, async (user)=>{
   if(user){
     usuarioAtual = user;
     if(unsubscribeCliente) unsubscribeCliente();
     unsubscribeCliente = onValue(ref(db,'clientes/'+user.uid), snap=>{
-      if(!snap.exists()) return;
+      if(!snap.exists()){
+        console.warn('⚠️ Usuário existe no Auth mas não no /clientes');
+        return;
+      }
       dadosCliente = snap.val();
       atualizarUI();
     });
-    // Escuta promoções ativas
     if(unsubscribePromos) unsubscribePromos();
     unsubscribePromos = onValue(ref(db,'promocoes'), snap=>{
       const promos = snap.val() || {};
@@ -676,7 +959,6 @@ onAuthStateChanged(auth, async (user)=>{
       }
       renderPromos();
     });
-    // Escuta config de cashback
     onValue(ref(db,'config/cashback_padrao'), snap=>{
       configCashback = snap.val() || null;
       renderPromos();
@@ -696,6 +978,7 @@ onAuthStateChanged(auth, async (user)=>{
   }
 });
 
+// ============ UI ============
 window.toggleSaldo = function(btn){
   saldoVisivel = !saldoVisivel; renderSaldo();
   btn.innerHTML = saldoVisivel ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>';
@@ -740,7 +1023,8 @@ function renderStats(){
   const totalGarrafoes = recargas.reduce((s,t)=>s+(t.garrafoes||0),0);
   document.getElementById('home-total-recargas').innerText = recargas.length;
   document.getElementById('home-ultima').innerText = trans[0] ? new Date(trans[0].data*1000).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}) : '—';
-document.getElementById('pf-saldo').innerText = 'R$ ' + (dadosCliente.saldo||0).toFixed(2).replace('.', ',');  document.getElementById('pf-recargas').innerText = recargas.length;
+  document.getElementById('pf-saldo').innerText = 'R$ ' + (dadosCliente.saldo||0).toFixed(2).replace('.', ',');
+  document.getElementById('pf-recargas').innerText = recargas.length;
   document.getElementById('pf-garrafoes').innerText = totalGarrafoes;
 }
 
@@ -748,17 +1032,10 @@ function txHTML(t){
   const isIn = t.tipo==='recarga';
   const bonus = Number(t.bonus_total || 0);
   const data = t.data ? new Date(t.data*1000).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}) : '—';
-  const titulo = isIn ? 'Recarga via PIX' : ('Consumo — ' + (t.garrafoes||1) + ' garrafão' + ((t.garrafoes||1)>1?'es':''));
+  const titulo = isIn ? 'Recarga via PIX' : ('Consumo — ' + (t.garrafoes||1) + ' crédito' + ((t.garrafoes||1)>1?'s':''));
   const sinal = isIn ? '+' : '−';
   const temBonus = isIn && bonus > 0;
-  return `<div class="tx-item" onclick='verDetalheTx(${JSON.stringify(t).replace(/'/g,"&#39;")})'>
-    <div class="tx-ico ${isIn?'in':'out'}">${isIn?ICON_IN:ICON_OUT}</div>
-    <div class="tx-body">
-      <div class="tx-title">${titulo}</div>
-      <div class="tx-date">${data}${temBonus ? ' · 🎁 +R$'+bonus.toFixed(2) : ''}</div>
-    </div>
-    <div class="tx-amount ${isIn?'in':'out'}">${sinal} R$ ${Math.abs(t.total || t.valor||0).toFixed(2)}</div>
-  </div>`;
+  return `<div class="tx-item" onclick='verDetalheTx(${JSON.stringify(t).replace(/'/g,"&#39;")})'><div class="tx-ico ${isIn?'in':'out'}">${isIn?ICON_IN:ICON_OUT}</div><div class="tx-body"><div class="tx-title">${titulo}</div><div class="tx-date">${data}${temBonus ? ' · 🎁 +R$'+bonus.toFixed(2) : ''}</div></div><div class="tx-amount ${isIn?'in':'out'}">${sinal} R$ ${Math.abs(t.total || t.valor||0).toFixed(2)}</div></div>`;
 }
 
 function renderHome(){
@@ -768,12 +1045,7 @@ function renderHome(){
   list.innerHTML = trans.map(txHTML).join('');
 }
 
-window.filtrarExtrato = function(f, el){
-  filtroAtual = f;
-  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  renderExtrato();
-};
+window.filtrarExtrato = function(f, el){ filtroAtual = f; document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active')); el.classList.add('active'); renderExtrato(); };
 
 function renderExtrato(){
   const list = document.getElementById('extrato-list');
@@ -785,7 +1057,6 @@ function renderExtrato(){
   list.innerHTML = Object.entries(grupos).map(([data, arr])=>`<div class="date-group"><div class="dg-head">${data}</div>${arr.map(txHTML).join('')}</div>`).join('');
 }
 
-// ==================== CASHBACK ====================
 function renderCashback(){
   if(!dadosCliente) return;
   const stats = dadosCliente.stats || {};
@@ -794,7 +1065,6 @@ function renderCashback(){
   const vip = Number(stats.total_cashback_vip || 0);
   const bonus = Number(stats.total_bonus_promo || 0);
   const recargas = Number(stats.total_recargas || 0);
-
   const fmt = v => 'R$ ' + Number(v||0).toFixed(2).replace('.', ',');
   const el = (id) => document.getElementById(id);
   if(el('cb-total')) el('cb-total').innerText = fmt(total);
@@ -802,62 +1072,50 @@ function renderCashback(){
   if(el('cb-bonus')) el('cb-bonus').innerText = fmt(bonus);
   if(el('cb-vip')) el('cb-vip').innerText = fmt(vip);
   if(el('cb-recargas')) el('cb-recargas').innerText = recargas;
-  if(el('cb-sub')) el('cb-sub').innerText = total > 0
-    ? `Você já ganhou ${fmt(total)} em ${recargas} recarga${recargas>1?'s':''}`
-    : 'Comece a recarregar pra ganhar';
+  if(el('cb-sub')) el('cb-sub').innerText = total > 0 ? `Você já ganhou ${fmt(total)}` : 'Comece a recarregar';
 
-  // Histórico de bônus
   const hist = dadosCliente.historico_cashback || {};
   const histArr = Object.entries(hist).map(([id,h])=>({id,...h})).sort((a,b)=>(b.data||0)-(a.data||0));
   const list = document.getElementById('cb-historico');
   if(!list) return;
-  if(histArr.length===0){
-    list.innerHTML = '<div class="empty"><h4>Sem bônus ainda</h4><p>Recarregue pra começar a acumular</p></div>';
-    return;
-  }
+  if(histArr.length===0){ list.innerHTML = '<div class="empty"><h4>Sem bônus ainda</h4></div>'; return; }
   list.innerHTML = histArr.slice(0,20).map(h=>{
     const data = h.data ? new Date(h.data*1000).toLocaleDateString('pt-BR') : '—';
     const totalBonus = Number(h.cashback_padrao||0) + Number(h.cashback_vip||0) + Number(h.bonus_promo||0);
-    return `<div class="tx-item">
-      <div class="tx-ico gift">${ICON_GIFT}</div>
-      <div class="tx-body">
-        <div class="tx-title">Recarga de R$ ${Number(h.valor_recarga||0).toFixed(2)}</div>
-        <div class="tx-date">${data} · total creditado R$ ${Number(h.total_creditado||0).toFixed(2)}</div>
-      </div>
-      <div class="tx-amount bonus">+ R$ ${totalBonus.toFixed(2)}<small>bônus</small></div>
-    </div>`;
+    return `<div class="tx-item"><div class="tx-ico gift">${ICON_GIFT}</div><div class="tx-body"><div class="tx-title">Recarga de R$ ${Number(h.valor_recarga||0).toFixed(2)}</div><div class="tx-date">${data}</div></div><div class="tx-amount bonus">+ R$ ${totalBonus.toFixed(2)}<small>bônus</small></div></div>`;
   }).join('');
 }
 
-// ==================== PROMOÇÕES ====================
 function renderPromos(){
   const container = document.getElementById('home-promo-container');
   const containerRec = document.getElementById('rec-promo-container');
+  const cashContainer = document.getElementById('home-cashback-container');
 
   let html = '';
   if(promocaoAtiva){
     const titulo = promocaoAtiva.titulo || 'Promoção especial';
     const minimo = Number(promocaoAtiva.valor_minimo || 0);
-    const bonus = Number(promocaoAtiva.valor_bonus || 0);
     const perc = Number(promocaoAtiva.percentual || 0);
     let sub = '';
     if(promocaoAtiva.regra === 'bonus_fixo') sub = `Nas recargas acima de R$ ${minimo.toFixed(2)}`;
     else if(promocaoAtiva.regra === 'percentual') sub = `Ganhe ${perc}% de bônus`;
     else if(promocaoAtiva.regra === 'multiplicador') sub = `Saldo multiplicado`;
-    html = `<div class="promo-banner" onclick="irPara('recarga')">
-      <div class="badge">${ICON_GIFT} PROMOÇÃO ATIVA</div>
-      <div class="titulo">${titulo}</div>
-      <div class="sub">${sub}</div>
-      <div class="cta">Aproveitar →
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </div>`;
+    html = `<div class="promo-banner" onclick="irPara('recarga')"><div class="badge">${ICON_GIFT} PROMOÇÃO ATIVA</div><div class="titulo">${titulo}</div><div class="sub">${sub}</div><div class="cta">Aproveitar →</div></div>`;
   }
   if(container) container.innerHTML = html;
   if(containerRec) containerRec.innerHTML = html;
+
+  // Card de cashback acumulado
+  if(cashContainer && dadosCliente){
+    const total = Number(dadosCliente.stats?.total_cashback_recebido || 0);
+    if(total > 0 || configCashback?.ativo){
+      cashContainer.innerHTML = `<div class="cashback-mini" onclick="irPara('cashback')"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="info"><div class="lbl">Cashback acumulado</div><div class="val">R$ ${total.toFixed(2).replace('.',',')}</div></div><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--txt-3)"><path d="M9 18l6-6-6-6"/></svg></div>`;
+    } else {
+      cashContainer.innerHTML = '';
+    }
+  }
 }
 
-// ==================== PREVIEW DE CRÉDITOS ====================
 async function atualizarPreview(){
   if(!usuarioAtual || !recargaSelecionada || recargaSelecionada < 2.50){
     previewAtual = null;
@@ -866,30 +1124,21 @@ async function atualizarPreview(){
     document.getElementById('rec-preview-bonus').innerHTML = '';
     return;
   }
-
   document.getElementById('rec-valor-pagar').innerText = 'R$ ' + recargaSelecionada.toFixed(2).replace('.',',');
-
   try {
     const res = await fetch(`${BACKEND_URL}/preview/${usuarioAtual.uid}/${recargaSelecionada}`);
     if(!res.ok) throw new Error('Erro');
     const data = await res.json();
     previewAtual = data;
-
     const bonus = Number(data.bonus_total || 0);
     const total = Number(data.total_receber || recargaSelecionada);
-
     let bonusHTML = '';
     if(bonus > 0){
-      bonusHTML = `
-        ${data.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${data.cashback_padrao.toFixed(2)}</span></div>` : ''}
-        ${data.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ Cashback VIP</span><span class="v">+ R$ ${data.cashback_vip.toFixed(2)}</span></div>` : ''}
-        ${data.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${data.promo_titulo || 'Bônus'}</span><span class="v">+ R$ ${data.bonus_promo.toFixed(2)}</span></div>` : ''}
-      `;
+      bonusHTML = `${data.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${data.cashback_padrao.toFixed(2)}</span></div>` : ''}${data.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ Cashback VIP</span><span class="v">+ R$ ${data.cashback_vip.toFixed(2)}</span></div>` : ''}${data.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${data.promo_titulo || 'Bônus'}</span><span class="v">+ R$ ${data.bonus_promo.toFixed(2)}</span></div>` : ''}`;
     }
     document.getElementById('rec-preview-bonus').innerHTML = bonusHTML;
     document.getElementById('rec-valor-receber').innerText = 'R$ ' + total.toFixed(2).replace('.',',');
   } catch(e){
-    // Fallback silencioso
     document.getElementById('rec-valor-receber').innerText = 'R$ ' + recargaSelecionada.toFixed(2).replace('.',',');
     document.getElementById('rec-preview-bonus').innerHTML = '';
   }
@@ -901,25 +1150,18 @@ window.verDetalheTx = function(t){
   document.getElementById('tx-d-ico').innerHTML = isIn?ICON_IN:ICON_OUT;
   document.getElementById('tx-d-amount').className = 'tx-detail-amount ' + (isIn?'in':'out');
   document.getElementById('tx-d-amount').innerText = (isIn?'+':'−')+' R$ '+Math.abs(t.total || t.valor||0).toFixed(2);
-  document.getElementById('tx-d-title').innerText = isIn?'Recarga via PIX':'Consumo na máquina';
+  document.getElementById('tx-d-title').innerText = isIn?'Recarga via PIX':'Consumo';
   const dateStr = t.data ? new Date(t.data*1000).toLocaleString('pt-BR') : '—';
-
-  let rowsHTML = `
-    <div class="tx-row"><span class="k">Data</span><span class="v">${dateStr}</span></div>
-    <div class="tx-row"><span class="k">Tipo</span><span class="v">${isIn?'Crédito':'Débito'}</span></div>
-  `;
+  let rowsHTML = `<div class="tx-row"><span class="k">Data</span><span class="v">${dateStr}</span></div><div class="tx-row"><span class="k">Tipo</span><span class="v">${isIn?'Crédito':'Débito'}</span></div>`;
   if(isIn){
-    const vp = Number(t.valor||0);
-    const cp = Number(t.cashback_padrao||0);
-    const cv = Number(t.cashback_vip||0);
-    const bp = Number(t.bonus_promo||0);
+    const vp = Number(t.valor||0), cp = Number(t.cashback_padrao||0), cv = Number(t.cashback_vip||0), bp = Number(t.bonus_promo||0);
     rowsHTML += `<div class="tx-row"><span class="k">Valor pago</span><span class="v">R$ ${vp.toFixed(2)}</span></div>`;
     if(cp > 0) rowsHTML += `<div class="tx-row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${cp.toFixed(2)}</span></div>`;
     if(cv > 0) rowsHTML += `<div class="tx-row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${cv.toFixed(2)}</span></div>`;
     if(bp > 0) rowsHTML += `<div class="tx-row bonus"><span class="k">🎁 ${t.promo_titulo||'Promoção'}</span><span class="v">+ R$ ${bp.toFixed(2)}</span></div>`;
-    rowsHTML += `<div class="tx-row" style="font-weight:800;border-top:2px solid #ffffff20;margin-top:8px;padding-top:12px"><span class="k">Total creditado</span><span class="v" style="color:var(--cyan)">R$ ${Number(t.total||0).toFixed(2)}</span></div>`;
+    rowsHTML += `<div class="tx-row" style="font-weight:800;border-top:2px solid #ffffff20;margin-top:8px;padding-top:12px"><span class="k">Total</span><span class="v" style="color:var(--cyan)">R$ ${Number(t.total||0).toFixed(2)}</span></div>`;
   } else {
-    rowsHTML += `<div class="tx-row"><span class="k">Garrafões</span><span class="v">${t.garrafoes||1}</span></div>`;
+    rowsHTML += `<div class="tx-row"><span class="k">Créditos</span><span class="v">${t.garrafoes||1}</span></div>`;
   }
   rowsHTML += `<div class="tx-row"><span class="k">ID</span><span class="v" style="font-size:11px">${t.id||'—'}</span></div>`;
   document.getElementById('tx-d-rows').innerHTML = rowsHTML;
@@ -929,24 +1171,19 @@ window.fecharModalTx = ()=> document.getElementById('modal-tx').classList.remove
 
 window.selRecarga = function(el, ev){ if(ev) ev.preventDefault(); document.querySelectorAll('.amount-card').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); recargaSelecionada = parseFloat(el.dataset.v); document.getElementById('rec-custom').value = ''; atualizarPreview(); };
 
-// ==================== PIX ====================
+// ============ PIX ============
 window.gerarPix = async function(){
   if(recargaSelecionada < 2.50) return toast('Escolha um valor (mínimo R$ 2,50)','error');
   if(!usuarioAtual || !dadosCliente) return toast('Faça login primeiro','error');
   showLoading('Gerando PIX...');
   try {
-    const res = await fetch(BACKEND_URL + '/criar-pix', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ uid: usuarioAtual.uid, valor: recargaSelecionada, nome: dadosCliente.nome })
-    });
+    const res = await fetch(BACKEND_URL + '/criar-pix', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ uid: usuarioAtual.uid, valor: recargaSelecionada, nome: dadosCliente.nome }) });
     const data = await res.json();
     if(!res.ok || !data.sucesso) throw new Error(data.erro || 'Erro ao criar PIX');
     pixAtual = data;
     abrirModalPix(data);
-  } catch(e){
-    toast('Erro: ' + e.message, 'error');
-  } finally { hideLoading(); }
+  } catch(e){ toast('Erro: ' + e.message, 'error'); }
+  finally { hideLoading(); }
 };
 
 function abrirModalPix(pix){
@@ -954,31 +1191,11 @@ function abrirModalPix(pix){
   document.getElementById('pix-titulo').innerText = 'Pagamento PIX';
   const preview = pix.preview || {};
   const total = Number(preview.total_receber || pix.valor);
-
   let previewHTML = '';
   if(preview.bonus_total > 0){
-    previewHTML = `
-      <div class="pix-preview-box">
-        <div class="row"><span class="k">Você paga</span><span class="v">R$ ${Number(preview.valor_pago).toFixed(2)}</span></div>
-        ${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}
-        ${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ Cashback VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}
-        ${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}
-        <div class="row total"><span class="k">Vai receber</span><span class="v">R$ ${total.toFixed(2)}</span></div>
-      </div>
-    `;
+    previewHTML = `<div class="pix-preview-box"><div class="row"><span class="k">Você paga</span><span class="v">R$ ${Number(preview.valor_pago).toFixed(2)}</span></div>${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}<div class="row total"><span class="k">Vai receber</span><span class="v">R$ ${total.toFixed(2)}</span></div></div>`;
   }
-
-  cont.innerHTML = `
-    <div class="pix-box">
-      <div class="pix-status-badge"><div class="dot"></div> AGUARDANDO PAGAMENTO</div>
-      ${previewHTML}
-      <div class="pix-qr-wrap"><img src="data:image/png;base64,${pix.qr_code_base64}" alt="QR PIX"></div>
-      <div style="font-size:13px;color:var(--text-2);margin-bottom:8px">Ou copie o código:</div>
-      <div class="pix-code" id="pix-code-text">${pix.qr_code}</div>
-      <button class="btn btn-primary" onclick="copiarPix()">Copiar código PIX</button>
-      <div class="pix-timer" style="margin-top:16px"><div class="dot"></div><span id="pix-timer-txt">Aguardando confirmação...</span></div>
-    </div>
-  `;
+  cont.innerHTML = `<div class="pix-box"><div class="pix-status-badge"><div class="dot"></div> AGUARDANDO PAGAMENTO</div>${previewHTML}<div class="pix-qr-wrap"><img src="data:image/png;base64,${pix.qr_code_base64}" alt="QR PIX"></div><div style="font-size:13px;color:var(--text-2);margin-bottom:8px">Ou copie o código:</div><div class="pix-code" id="pix-code-text">${pix.qr_code}</div><button class="btn btn-primary" onclick="copiarPix()">Copiar código PIX</button><div class="pix-timer" style="margin-top:16px"><div class="dot"></div><span id="pix-timer-txt">Aguardando...</span></div></div>`;
   document.getElementById('modal-pix').classList.add('active');
   pixExpiraEm = Date.now() + (30 * 60 * 1000);
   iniciarPixPolling();
@@ -999,18 +1216,14 @@ async function verificarPix(){
   const timerEl = document.getElementById('pix-timer-txt');
   if(timerEl && restante > 0){
     const m = Math.floor(restante/60), s = restante % 60;
-    timerEl.innerText = `Aguardando confirmação... (${m}:${s.toString().padStart(2,'0')})`;
+    timerEl.innerText = `Aguardando... (${m}:${s.toString().padStart(2,'0')})`;
   }
   try {
     const res = await fetch(`${BACKEND_URL}/status/${pixAtual.payment_id}`);
     if(!res.ok) return;
     const data = await res.json();
-    if(data.status === 'completed'){
-      pararPixPolling();
-      mostrarSucessoPix(pixAtual);
-    } else if(data.status === 'rejected' || data.status === 'cancelled'){
-      pararPixPolling(); toast('Pagamento não aprovado','error'); fecharPix();
-    }
+    if(data.status === 'completed'){ pararPixPolling(); mostrarSucessoPix(pixAtual); }
+    else if(data.status === 'rejected' || data.status === 'cancelled'){ pararPixPolling(); toast('Pagamento não aprovado','error'); fecharPix(); }
   } catch(e){}
 }
 
@@ -1021,40 +1234,19 @@ function mostrarSucessoPix(pix){
   const valorPago = Number(preview.valor_pago || pix.valor);
   const bonus = Number(preview.bonus_total || 0);
   const total = Number(preview.total_receber || pix.valor);
-
   let detalhesHTML = '';
   if(bonus > 0){
-    detalhesHTML = `
-      <div class="detalhes">
-        <div class="row"><span class="k">Valor pago</span><span class="v">R$ ${valorPago.toFixed(2)}</span></div>
-        ${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}
-        ${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}
-        ${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}
-        <div class="row total"><span class="k">Total creditado</span><span class="v">R$ ${total.toFixed(2)}</span></div>
-      </div>
-    `;
+    detalhesHTML = `<div class="detalhes"><div class="row"><span class="k">Valor pago</span><span class="v">R$ ${valorPago.toFixed(2)}</span></div>${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}<div class="row total"><span class="k">Total</span><span class="v">R$ ${total.toFixed(2)}</span></div></div>`;
   }
-
-  cont.innerHTML = `
-    <div class="pix-success">
-      <div class="pix-success-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></div>
-      <h2>Saldo adicionado!</h2>
-      <div class="valor">+ R$ ${total.toFixed(2)}</div>
-      ${detalhesHTML}
-      <button class="btn btn-primary" onclick="fecharPix()">Entendi</button>
-    </div>
-  `;
+  cont.innerHTML = `<div class="pix-success"><div class="pix-success-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></div><h2>Saldo adicionado!</h2><div class="valor">+ R$ ${total.toFixed(2)}</div>${detalhesHTML}<button class="btn btn-primary" onclick="fecharPix()">Entendi</button></div>`;
   if(navigator.vibrate) navigator.vibrate([100,50,100]);
 }
 
-window.fecharPix = function(){
-  pararPixPolling();
-  document.getElementById('modal-pix').classList.remove('active');
-  pixAtual = null;
-};
+window.fecharPix = function(){ pararPixPolling(); document.getElementById('modal-pix').classList.remove('active'); pixAtual = null; };
 
 document.getElementById('modal-tx').addEventListener('click', e=>{ if(e.target.id === 'modal-tx') fecharModalTx(); });
-document.getElementById('modal-cadastro').addEventListener('click', e=>{ if(e.target.id === 'modal-cadastro') fecharCadastro(); });
+document.getElementById('modal-cadastro').addEventListener('click', e=>{ if(e.target.id === 'modal-cadastro') fecharModal('modal-cadastro'); });
+document.getElementById('modal-recuperar').addEventListener('click', e=>{ if(e.target.id === 'modal-recuperar') fecharModal('modal-recuperar'); });
 document.getElementById('modal-pix').addEventListener('click', e=>{ if(e.target.id === 'modal-pix') fecharPix(); });
 </script>
 </body>
