@@ -300,6 +300,64 @@ svg{display:block}
 .modal-body{padding:16px 24px 24px}
 .modal-text{font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px}
 
+/* ================= MODAL DE CONFIRMAÇÃO ================= */
+.confirm-modal-content{padding:0 24px 32px;text-align:center}
+.confirm-icon{
+  width:80px;height:80px;border-radius:24px;
+  background:linear-gradient(135deg,#FF4757,#FF2E3D);
+  display:flex;align-items:center;justify-content:center;
+  margin:20px auto;
+  box-shadow:0 12px 40px rgba(255,71,87,0.5);
+  animation:shake .5s ease-in-out;
+}
+@keyframes shake{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(-5deg)}
+  75%{transform:rotate(5deg)}
+}
+.confirm-icon svg{width:44px;height:44px}
+.confirm-title{
+  font-size:22px;font-weight:800;margin-bottom:12px;
+  color:#FF4757;
+}
+.confirm-sub{
+  font-size:14px;color:var(--text-2);line-height:1.6;
+  margin-bottom:24px;
+}
+.confirm-alert{
+  background:rgba(255,71,87,0.1);
+  border:1px solid rgba(255,71,87,0.35);
+  border-radius:var(--radius);
+  padding:16px;margin-bottom:20px;text-align:left;
+}
+.confirm-alert .linha{
+  display:flex;justify-content:space-between;
+  padding:6px 0;font-size:14px;
+}
+.confirm-alert .linha .k{color:var(--text-2)}
+.confirm-alert .linha .v{
+  font-weight:800;color:#FF4757;
+  font-variant-numeric:tabular-nums;
+}
+.confirm-alert .linha.total{
+  border-top:1px solid rgba(255,71,87,0.3);
+  margin-top:8px;padding-top:12px;font-size:16px;
+}
+.confirm-alert .linha.total .v{font-size:20px}
+.confirm-alert .aviso{
+  background:rgba(255,71,87,0.15);
+  border-radius:var(--radius-sm);
+  padding:10px;margin-top:12px;
+  font-size:12px;color:#FF4757;
+  text-align:center;line-height:1.5;
+}
+.btn-confirmar-danger{
+  background:linear-gradient(135deg,#FF4757,#FF2E3D);
+  color:#fff;
+  box-shadow:0 8px 24px rgba(255,71,87,0.4);
+}
+.btn-confirmar-danger:active{transform:scale(.98)}
+
 /* ================= APP HEADER ================= */
 .app-header{
   display:flex;justify-content:space-between;align-items:center;
@@ -398,6 +456,40 @@ svg{display:block}
 }
 .bal-stat .k{font-size:10px;color:var(--text-2);letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
 .bal-stat .v{font-size:14px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+
+/* ================= CARROSSEL DE BANNERS ================= */
+.banners-carousel{
+  margin:0 20px 16px;
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  position:relative;
+  background:#ffffff04;
+  border:1px solid var(--border);
+  aspect-ratio:2/1;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+.banners-carousel.hidden{display:none}
+.banners-track{position:relative;width:100%;height:100%}
+.banners-slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;transition:opacity .6s ease-in-out;
+  pointer-events:none;
+}
+.banners-slide.active{opacity:1}
+.banners-dots{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;z-index:2;
+  background:rgba(0,0,0,0.35);
+  padding:6px 10px;border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+.banners-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,0.4);
+  transition:.3s;
+}
+.banners-dot.active{background:#fff;width:20px;border-radius:4px}
 
 /* ================= LIBERAR MÁQUINA (DESTAQUE) ================= */
 .release-card{
@@ -1000,6 +1092,55 @@ svg{display:block}
   </div>
 </div>
 
+<!-- ================= MODAL DE CONFIRMAÇÃO ================= -->
+<div class="modal-overlay" id="modal-confirmar">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="confirm-modal-content">
+      <div class="confirm-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 9v4M12 17h.01"/>
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        </svg>
+      </div>
+      <div class="confirm-title">Atenção!</div>
+      <div class="confirm-sub">Você está prestes a liberar a bomba</div>
+
+      <div class="confirm-alert">
+        <div class="linha">
+          <span class="k">Garrafões</span>
+          <span class="v" id="conf-qtd">0</span>
+        </div>
+        <div class="linha">
+          <span class="k">Valor unitário</span>
+          <span class="v" id="conf-unit">R$ 2,50</span>
+        </div>
+        <div class="linha total">
+          <span class="k">Total a debitar</span>
+          <span class="v" id="conf-total">R$ 0,00</span>
+        </div>
+
+        <div class="aviso" id="conf-saldo-aviso">
+          💰 Saldo atual: <strong id="conf-saldo">R$ 0,00</strong>
+        </div>
+
+        <div class="aviso" style="background:rgba(255,71,87,0.25);font-weight:700;margin-top:8px">
+          ⚠️ O valor será <u>debitado do seu saldo imediatamente</u> e a bomba será liberada.
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btn-secondary" style="flex:1" onclick="fecharConfirmar()">
+          Cancelar
+        </button>
+        <button class="btn btn-confirmar-danger" style="flex:1" onclick="confirmarLiberacao()" id="btn-confirmar-final">
+          Sim, liberar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ================= HOME ================= -->
 <div class="screen" id="screen-home">
   <div class="app-header">
@@ -1025,6 +1166,12 @@ svg{display:block}
       <div class="bal-stat"><div class="k">Recargas</div><div class="v" id="home-total-recargas">0</div></div>
       <div class="bal-stat"><div class="k">Créditos</div><div class="v" id="home-total-creditos">0</div></div>
     </div>
+  </div>
+
+  <!-- ================= CARROSSEL DE BANNERS ================= -->
+  <div class="banners-carousel hidden" id="banners-carousel">
+    <div class="banners-track" id="banners-track"></div>
+    <div class="banners-dots" id="banners-dots"></div>
   </div>
 
   <!-- BOTÃO LIBERAR MÁQUINA (destaque) -->
@@ -1242,9 +1389,13 @@ const auth = getAuth(app);
 
 const BACKEND_URL = "https://vision-agua-backend.onrender.com";
 const WHATSAPP_SUPORTE = "5588992477625";
-const PRECO_CREDITO = 2.50;  // valor de 1 garrafão
+const PRECO_CREDITO = 2.50;
 
 let usuarioAtual = null, dadosCliente = null, unsubscribeCliente = null, unsubscribeSolic = null;
+let unsubscribeBanners = null;
+let bannersArr = [];
+let bannerIdx = 0;
+let bannerTimer = null;
 let filtroAtual = 'todos', recargaSelecionada = 0, saldoVisivel = true, menuAberto = false;
 let pixAtual = null, pixInterval = null, pixExpiraEm = 0;
 let tentativasLogin = 0;
@@ -1256,7 +1407,6 @@ const ICON_IN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 const ICON_OUT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
 const ICON_GIFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>';
 
-// Splash
 setTimeout(()=>{
   document.getElementById('splash').classList.add('hide');
   setTimeout(()=>document.getElementById('splash').style.display='none',700);
@@ -1310,7 +1460,6 @@ window.showLoading = (msg)=> {
 window.hideLoading = ()=> document.getElementById('loading').classList.remove('active');
 window.fecharModal = (id)=> document.getElementById(id).classList.remove('active');
 
-// Máscaras
 const maskCPF = v => v.replace(/\D/g,'').slice(0,11).replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
 const maskPhone = v => v.replace(/\D/g,'').slice(0,11).replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2');
 
@@ -1343,7 +1492,6 @@ window.togglePwd = function(id, btn){
 window.abrirCadastro = ()=> document.getElementById('modal-cadastro').classList.add('active');
 window.abrirRecuperar = ()=> document.getElementById('modal-recuperar').classList.add('active');
 
-// ================= GERAÇÃO DE CÓDIGO ÚNICO =================
 async function gerarCodigoUnico(){
   const maxTentativas = 30;
   for(let i = 0; i < maxTentativas; i++){
@@ -1404,7 +1552,6 @@ window.criarConta = async function(){
   } finally { hideLoading(); }
 };
 
-// ================= LOGIN =================
 window.fazerLogin = async function(){
   const idInput = document.getElementById('login-id').value.trim();
   const senha = document.getElementById('login-senha').value;
@@ -1452,7 +1599,6 @@ window.pedirRecuperacao = function(){
   fecharModal('modal-recuperar');
 };
 
-// ================= AUTH STATE =================
 onAuthStateChanged(auth, async (user)=>{
   if(user){
     usuarioAtual = user;
@@ -1462,11 +1608,26 @@ onAuthStateChanged(auth, async (user)=>{
       dadosCliente = snap.val();
       atualizarUI();
     });
+
+    // ================= LISTENER DE BANNERS =================
+    if(unsubscribeBanners) unsubscribeBanners();
+    unsubscribeBanners = onValue(ref(db,'banners'), snap=>{
+      const val = snap.val() || {};
+      bannersArr = Object.entries(val)
+        .map(([id,b])=>({id,...b}))
+        .filter(b => b.ativo !== false)
+        .sort((a,b)=>(a.ordem||0)-(b.ordem||0));
+      renderBannersCarrossel();
+    });
+
     document.getElementById('bottom-nav').style.display = 'flex';
     irPara('home');
   } else {
     usuarioAtual = null; dadosCliente = null;
     if(unsubscribeCliente){ unsubscribeCliente(); unsubscribeCliente = null; }
+    if(unsubscribeBanners){ unsubscribeBanners(); unsubscribeBanners = null; }
+    bannersArr = [];
+    renderBannersCarrossel();
     document.getElementById('bottom-nav').style.display = 'none';
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById('screen-login').classList.add('active');
@@ -1475,7 +1636,6 @@ onAuthStateChanged(auth, async (user)=>{
   }
 });
 
-// ================= UI =================
 window.toggleSaldo = function(btn){
   saldoVisivel = !saldoVisivel; renderSaldo();
   btn.innerHTML = saldoVisivel
@@ -1643,7 +1803,6 @@ window.verDetalheTx = function(t){
 };
 window.fecharModalTx = ()=> document.getElementById('modal-tx').classList.remove('active');
 
-// ================= RECARGA =================
 window.selRecarga = function(el){
   document.querySelectorAll('.amount-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
@@ -1682,7 +1841,6 @@ async function atualizarPreview(){
   }
 }
 
-// ================= PIX =================
 window.gerarPix = async function(){
   if(recargaSelecionada < 2.50) return toast('Escolha um valor (mínimo R$ 2,50)','error');
   if(!usuarioAtual || !dadosCliente) return toast('Faça login primeiro','error');
@@ -1802,7 +1960,6 @@ window.fecharPix = function(){
   pixAtual = null;
 };
 
-// ================= LIBERAR MÁQUINA =================
 window.abrirLiberar = function(){
   qtdLiberar = 0;
   document.getElementById('liberar-titulo').innerText = 'Liberar máquina';
@@ -1897,7 +2054,7 @@ function atualizarResumoLiberar(){
   }
 }
 
-window.confirmarLiberar = async function(){
+window.confirmarLiberar = function(){
   if(qtdLiberar < 1) return;
   if(!usuarioAtual || !dadosCliente) return;
 
@@ -1907,9 +2064,28 @@ window.confirmarLiberar = async function(){
     return toast('Saldo insuficiente', 'error');
   }
 
-  showLoading('Enviando pedido...');
+  document.getElementById('conf-qtd').innerText = qtdLiberar;
+  document.getElementById('conf-unit').innerText = fmtBRL(PRECO_CREDITO);
+  document.getElementById('conf-total').innerText = fmtBRL(total);
+  document.getElementById('conf-saldo').innerText = fmtBRL(saldo);
+
+  document.getElementById('modal-liberar').classList.remove('active');
+  document.getElementById('modal-confirmar').classList.add('active');
+};
+
+window.fecharConfirmar = function(){
+  document.getElementById('modal-confirmar').classList.remove('active');
+  document.getElementById('modal-liberar').classList.add('active');
+};
+
+window.confirmarLiberacao = async function(){
+  const btn = document.getElementById('btn-confirmar-final');
+  btn.disabled = true;
+  btn.innerText = 'Enviando...';
+
+  const total = qtdLiberar * PRECO_CREDITO;
+
   try {
-    // Cria solicitação no Firebase
     await set(ref(db, 'solicitacoes/' + usuarioAtual.uid), {
       uid: usuarioAtual.uid,
       nome: dadosCliente.nome,
@@ -1926,11 +2102,19 @@ window.confirmarLiberar = async function(){
     });
 
     solicitacaoAtual = { uid: usuarioAtual.uid, qtd: qtdLiberar, total: total };
+
+    document.getElementById('modal-confirmar').classList.remove('active');
+    document.getElementById('modal-liberar').classList.add('active');
     mostrarAguardando();
     iniciarSolPolling();
+
+    btn.disabled = false;
+    btn.innerText = 'Sim, liberar';
   } catch(e){
     toast('Erro: ' + e.message, 'error');
-  } finally { hideLoading(); }
+    btn.disabled = false;
+    btn.innerText = 'Sim, liberar';
+  }
 };
 
 function mostrarAguardando(){
@@ -2046,13 +2230,54 @@ function mostrarNegado(motivo){
   solicitacaoAtual = null;
 }
 
-// Fecha modais ao clicar fora
+// ================= CARROSSEL DE BANNERS =================
+function renderBannersCarrossel(){
+  const carrossel = document.getElementById('banners-carousel');
+  const track = document.getElementById('banners-track');
+  const dotsEl = document.getElementById('banners-dots');
+  if(!carrossel || !track) return;
+
+  if(bannerTimer){ clearInterval(bannerTimer); bannerTimer = null; }
+
+  if(bannersArr.length === 0){
+    carrossel.classList.add('hidden');
+    track.innerHTML = '';
+    dotsEl.innerHTML = '';
+    return;
+  }
+
+  carrossel.classList.remove('hidden');
+  bannerIdx = 0;
+
+  track.innerHTML = bannersArr.map((b,i) =>
+    `<div class="banners-slide ${i===0?'active':''}" style="background-image:url('${b.url}')"></div>`
+  ).join('');
+
+  dotsEl.innerHTML = bannersArr.length > 1 ? bannersArr.map((_,i) =>
+    `<div class="banners-dot ${i===0?'active':''}"></div>`
+  ).join('') : '';
+
+  if(bannersArr.length > 1){
+    bannerTimer = setInterval(()=>{
+      const slides = track.querySelectorAll('.banners-slide');
+      const dots = dotsEl.querySelectorAll('.banners-dot');
+      if(slides.length === 0) return;
+      slides[bannerIdx].classList.remove('active');
+      if(dots[bannerIdx]) dots[bannerIdx].classList.remove('active');
+      bannerIdx = (bannerIdx + 1) % slides.length;
+      slides[bannerIdx].classList.add('active');
+      if(dots[bannerIdx]) dots[bannerIdx].classList.add('active');
+    }, 5000);
+  }
+}
+
 document.getElementById('modal-tx').addEventListener('click', e=>{ if(e.target.id === 'modal-tx') fecharModalTx(); });
 document.getElementById('modal-cadastro').addEventListener('click', e=>{ if(e.target.id === 'modal-cadastro') fecharModal('modal-cadastro'); });
 document.getElementById('modal-recuperar').addEventListener('click', e=>{ if(e.target.id === 'modal-recuperar') fecharModal('modal-recuperar'); });
 document.getElementById('modal-pix').addEventListener('click', e=>{ if(e.target.id === 'modal-pix') fecharPix(); });
 document.getElementById('modal-codigo').addEventListener('click', e=>{ if(e.target.id === 'modal-codigo') fecharModal('modal-codigo'); });
 document.getElementById('modal-liberar').addEventListener('click', e=>{ if(e.target.id === 'modal-liberar') fecharLiberar(); });
+document.getElementById('modal-confirmar').addEventListener('click', e=>{ if(e.target.id === 'modal-confirmar') fecharConfirmar(); });
 </script>
 </body>
 </html>
