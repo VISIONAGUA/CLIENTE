@@ -740,8 +740,7 @@ function renderStats(){
   const totalGarrafoes = recargas.reduce((s,t)=>s+(t.garrafoes||0),0);
   document.getElementById('home-total-recargas').innerText = recargas.length;
   document.getElementById('home-ultima').innerText = trans[0] ? new Date(trans[0].data*1000).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}) : '—';
-  document.getElementById('pf-saldo').innerText = 'R$ ' + (dadosCliente.saldo||0).toFixed(0);
-  document.getElementById('pf-recargas').innerText = recargas.length;
+document.getElementById('pf-saldo').innerText = 'R$ ' + (dadosCliente.saldo||0).toFixed(2).replace('.', ',');  document.getElementById('pf-recargas').innerText = recargas.length;
   document.getElementById('pf-garrafoes').innerText = totalGarrafoes;
 }
 
