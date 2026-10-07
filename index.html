@@ -16,170 +16,40 @@ input{outline:none;background:none;border:none}
 svg{display:block}
 
 /* ==================== SPLASH PREMIUM ==================== */
-#splash{
-  position:fixed;inset:0;z-index:9999;
-  background:radial-gradient(ellipse at 50% 20%,#0a2a4a 0%,#051428 45%,#020810 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:opacity .8s cubic-bezier(.4,0,.2,1),visibility .8s;
-  overflow:hidden;
-}
+#splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 20%,#0a2a4a 0%,#051428 45%,#020810 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s cubic-bezier(.4,0,.2,1),visibility .8s;overflow:hidden}
 #splash.hide{opacity:0;visibility:hidden}
-
-/* Partículas de fundo */
 .splash-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.splash-particles span{
-  position:absolute;width:2px;height:2px;border-radius:50%;
-  background:#00ddff;opacity:0;
-  animation:particleFloat 8s infinite linear;
-}
+.splash-particles span{position:absolute;width:2px;height:2px;border-radius:50%;background:#00ddff;opacity:0;animation:particleFloat 8s infinite linear}
 .splash-particles span:nth-child(1){left:15%;top:30%;animation-delay:0s}
 .splash-particles span:nth-child(2){left:75%;top:60%;animation-delay:1.5s}
 .splash-particles span:nth-child(3){left:45%;top:15%;animation-delay:3s}
 .splash-particles span:nth-child(4){left:85%;top:25%;animation-delay:4.5s}
 .splash-particles span:nth-child(5){left:25%;top:75%;animation-delay:6s}
 .splash-particles span:nth-child(6){left:65%;top:85%;animation-delay:2.5s}
-@keyframes particleFloat{
-  0%{opacity:0;transform:translateY(0) scale(1)}
-  20%{opacity:1}
-  80%{opacity:1}
-  100%{opacity:0;transform:translateY(-100px) scale(1.5)}
-}
-
-/* Container central do logo */
-.splash-core{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;
-  animation:splashFadeUp 1s cubic-bezier(.2,.9,.2,1) both;
-}
-@keyframes splashFadeUp{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:none}
-}
-
-/* Logo V premium */
-.splash-logo{
-  position:relative;
-  width:120px;height:120px;border-radius:32px;
-  background:linear-gradient(135deg,#00DDFF 0%,#0080FF 50%,#00E676 100%);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:
-    0 0 60px #00ddff55,
-    0 0 120px #00ddff22,
-    0 20px 60px #00000080,
-    inset 0 -8px 30px #00000040,
-    inset 0 4px 20px #ffffff30;
-  animation:logoAppear 1.2s cubic-bezier(.34,1.56,.64,1) both;
-  overflow:hidden;
-}
-@keyframes logoAppear{
-  0%{transform:scale(0) rotate(-45deg);opacity:0}
-  60%{transform:scale(1.1) rotate(5deg)}
-  100%{transform:scale(1) rotate(0);opacity:1}
-}
-
-/* Brilho passando pelo logo */
-.splash-logo::after{
-  content:'';position:absolute;
-  top:-50%;left:-50%;
-  width:200%;height:200%;
-  background:linear-gradient(115deg,transparent 30%,#ffffff90 50%,transparent 70%);
-  animation:logoShine 2.5s ease-in-out infinite;
-  animation-delay:1.2s;
-}
-@keyframes logoShine{
-  0%{transform:translateX(-100%) translateY(-100%) rotate(0)}
-  100%{transform:translateX(100%) translateY(100%) rotate(0)}
-}
-
-.splash-logo svg{
-  width:60px;height:60px;
-  filter:drop-shadow(0 2px 8px #00000050);
-  z-index:1;position:relative;
-}
-
-/* Anel pulsante ao redor do logo */
-.splash-ring{
-  position:absolute;
-  width:120px;height:120px;border-radius:32px;
-  border:2px solid #00ddff;
-  opacity:0;
-  animation:ringPulse 3s ease-out infinite;
-  animation-delay:1.5s;
-}
+@keyframes particleFloat{0%{opacity:0;transform:translateY(0) scale(1)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(-100px) scale(1.5)}}
+.splash-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;animation:splashFadeUp 1s cubic-bezier(.2,.9,.2,1) both}
+@keyframes splashFadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.splash-logo{position:relative;width:120px;height:120px;border-radius:32px;background:linear-gradient(135deg,#00DDFF 0%,#0080FF 50%,#00E676 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px #00ddff55,0 0 120px #00ddff22,0 20px 60px #00000080,inset 0 -8px 30px #00000040,inset 0 4px 20px #ffffff30;animation:logoAppear 1.2s cubic-bezier(.34,1.56,.64,1) both;overflow:hidden}
+@keyframes logoAppear{0%{transform:scale(0) rotate(-45deg);opacity:0}60%{transform:scale(1.1) rotate(5deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+.splash-logo::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(115deg,transparent 30%,#ffffff90 50%,transparent 70%);animation:logoShine 2.5s ease-in-out infinite;animation-delay:1.2s}
+@keyframes logoShine{0%{transform:translateX(-100%) translateY(-100%) rotate(0)}100%{transform:translateX(100%) translateY(100%) rotate(0)}}
+.splash-logo svg{width:60px;height:60px;filter:drop-shadow(0 2px 8px #00000050);z-index:1;position:relative}
+.splash-ring{position:absolute;width:120px;height:120px;border-radius:32px;border:2px solid #00ddff;opacity:0;animation:ringPulse 3s ease-out infinite;animation-delay:1.5s}
 .splash-ring:nth-child(2){animation-delay:1.5s}
 .splash-ring:nth-child(3){animation-delay:2.3s}
-@keyframes ringPulse{
-  0%{transform:scale(1);opacity:.6}
-  100%{transform:scale(1.8);opacity:0}
-}
+@keyframes ringPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.8);opacity:0}}
+.splash-title{font-size:52px;font-weight:900;letter-spacing:6px;margin-top:40px;background:linear-gradient(180deg,#fff 0%,#00DDFF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;animation:titleAppear .9s .4s cubic-bezier(.2,.9,.2,1) both}
+@keyframes titleAppear{from{opacity:0;letter-spacing:20px;transform:translateY(10px)}to{opacity:1;letter-spacing:6px;transform:none}}
+.splash-line{width:0;height:2px;margin-top:16px;background:linear-gradient(90deg,transparent,#00DDFF,transparent);border-radius:2px;animation:lineExpand 1s 1.2s cubic-bezier(.4,0,.2,1) both}
+@keyframes lineExpand{from{width:0;opacity:0}to{width:200px;opacity:1}}
+.splash-sub{color:var(--text-2);font-size:13px;letter-spacing:3px;margin-top:18px;font-weight:500;text-align:center;text-transform:uppercase;animation:sloganAppear .9s 1.5s cubic-bezier(.2,.9,.2,1) both;max-width:280px;line-height:1.6}
+@keyframes sloganAppear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.splash-loader{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:160px;height:3px;background:#ffffff10;border-radius:2px;overflow:hidden;animation:sloganAppear .6s 1.8s both}
+.splash-loader::after{content:'';display:block;height:100%;width:40%;background:linear-gradient(90deg,transparent,#00DDFF,#00E676,transparent);animation:loadingBar 1.6s infinite ease-in-out}
+@keyframes loadingBar{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+.splash-version{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--text-3);letter-spacing:2px;animation:sloganAppear .5s 2.2s both}
 
-/* Nome VISION */
-.splash-title{
-  font-size:52px;font-weight:900;letter-spacing:6px;
-  margin-top:40px;
-  background:linear-gradient(180deg,#fff 0%,#00DDFF 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  text-align:center;
-  animation:titleAppear .9s .4s cubic-bezier(.2,.9,.2,1) both;
-  font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;
-}
-@keyframes titleAppear{
-  from{opacity:0;letter-spacing:20px;transform:translateY(10px)}
-  to{opacity:1;letter-spacing:6px;transform:none}
-}
-
-/* Linha decorativa */
-.splash-line{
-  width:0;height:2px;margin-top:16px;
-  background:linear-gradient(90deg,transparent,#00DDFF,transparent);
-  border-radius:2px;
-  animation:lineExpand 1s 1.2s cubic-bezier(.4,0,.2,1) both;
-}
-@keyframes lineExpand{
-  from{width:0;opacity:0}
-  to{width:200px;opacity:1}
-}
-
-/* Slogan */
-.splash-sub{
-  color:var(--text-2);font-size:13px;letter-spacing:3px;
-  margin-top:18px;font-weight:500;
-  text-align:center;
-  text-transform:uppercase;
-  animation:sloganAppear .9s 1.5s cubic-bezier(.2,.9,.2,1) both;
-  max-width:280px;line-height:1.6;
-}
-@keyframes sloganAppear{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:none}
-}
-
-/* Barra de progresso */
-.splash-loader{
-  position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
-  width:160px;height:3px;
-  background:#ffffff10;border-radius:2px;overflow:hidden;
-  animation:sloganAppear .6s 1.8s both;
-}
-.splash-loader::after{
-  content:'';display:block;height:100%;width:40%;
-  background:linear-gradient(90deg,transparent,#00DDFF,#00E676,transparent);
-  animation:loadingBar 1.6s infinite ease-in-out;
-}
-@keyframes loadingBar{
-  0%{transform:translateX(-100%)}
-  100%{transform:translateX(350%)}
-}
-
-/* Versão no canto inferior */
-.splash-version{
-  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
-  font-size:10px;color:var(--text-3);letter-spacing:2px;
-  animation:sloganAppear .5s 2.2s both;
-}
-
-/* ==================== SCREENS ==================== */
+/* SCREENS */
 .screen{display:none;min-height:100vh;max-width:520px;margin:0 auto;background:radial-gradient(ellipse at top,#082038,#051428 55%,#03101e);position:relative}
 .screen.active{display:block;animation:screenIn .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes screenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -187,10 +57,10 @@ svg{display:block}
 .btn{width:100%;padding:18px;border-radius:16px;font-weight:700;font-size:15px;letter-spacing:.3px;transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn:active{transform:scale(.98)}
 .btn-primary{background:linear-gradient(135deg,#00DDFF,#00a8c4);color:var(--navy-900);box-shadow:0 8px 24px #00ddff30}
+.btn-primary:disabled{opacity:.5;box-shadow:none}
 .btn-secondary{background:#ffffff10;color:var(--text);border:1.5px solid var(--border-2);backdrop-filter:blur(10px)}
 .btn-danger{background:#ff475720;color:var(--red);border:1.5px solid #ff475740}
 
-/* AUTH */
 .auth-screen{display:flex;flex-direction:column;min-height:100vh;padding:32px 24px 24px}
 .auth-top{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:40px}
 .auth-logo{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,#00DDFF,#0080FF,#00E676);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px #00ddff40;margin-bottom:20px}
@@ -214,7 +84,6 @@ svg{display:block}
 .debug-box.show{display:block}
 .debug-box strong{color:var(--yellow)}
 
-/* MODAIS */
 .modal-overlay{position:fixed;inset:0;background:#00000080;backdrop-filter:blur(8px);z-index:1000;display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.active{display:flex;animation:fadeIn .2s}
 .modal{width:100%;max-width:520px;background:radial-gradient(ellipse at top,#0a2a4a,#051428);border-top-left-radius:28px;border-top-right-radius:28px;max-height:92vh;overflow-y:auto;animation:modalIn .35s cubic-bezier(.2,.8,.2,1);border-top:1px solid #00ddff30}
@@ -227,7 +96,6 @@ svg{display:block}
 .modal-body{padding:16px 24px 24px}
 .modal-text{font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px}
 
-/* APP */
 .app-header{display:flex;justify-content:space-between;align-items:center;padding:20px 20px 12px;position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#082038ee,#08203800);backdrop-filter:blur(20px)}
 .user-chip{display:flex;align-items:center;gap:12px}
 .user-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#00DDFF,#0080FF,#00E676);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy-900);font-size:16px;flex-shrink:0;box-shadow:0 4px 12px #00ddff30;cursor:pointer;transition:.2s;border:2px solid transparent}
@@ -250,6 +118,20 @@ svg{display:block}
 .menu-item.danger svg{color:var(--red)}
 .menu-divider{height:1px;background:#ffffff10;margin:4px 0}
 
+/* ==================== CARROSSEL ==================== */
+.carousel-wrap{margin:0 20px 16px;position:relative;border-radius:20px;overflow:hidden;background:#082038;box-shadow:0 8px 32px #00000060;aspect-ratio:2/1}
+.carousel-track{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1);touch-action:pan-y}
+.carousel-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.carousel-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:#ffffff50;transition:.3s;cursor:pointer}
+.carousel-dot.active{background:#fff;width:22px;border-radius:3px}
+.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:#00000060;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;opacity:0;transition:.2s;z-index:2}
+.carousel-wrap:hover .carousel-nav{opacity:1}
+.carousel-nav.prev{left:12px}
+.carousel-nav.next{right:12px}
+.carousel-nav svg{width:16px;height:16px}
+
 .balance-card{margin:8px 20px 20px;background:linear-gradient(135deg,#0e3a63 0%,#0a2a4a 50%,#082038 100%);border-radius:24px;padding:26px;position:relative;overflow:hidden;border:1px solid #00ddff20;box-shadow:0 12px 32px #00000040}
 .balance-card::before{content:'';position:absolute;top:-40%;right:-20%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,#00DDFF 0%,transparent 70%);opacity:.15;pointer-events:none}
 .balance-card::after{content:'';position:absolute;bottom:-50%;left:-20%;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#00E676 0%,transparent 70%);opacity:.1;pointer-events:none}
@@ -264,16 +146,8 @@ svg{display:block}
 .bal-stat .k{font-size:10px;color:#B0C4DE;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
 .bal-stat .v{font-size:14px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
 
-.promo-banner{margin:0 20px 16px;padding:18px 20px;border-radius:18px;background:linear-gradient(135deg,#FF6B9D,#FFC857);color:#03101e;position:relative;overflow:hidden;box-shadow:0 8px 24px #ff6b9d40;cursor:pointer;transition:.2s}
-.promo-banner:active{transform:scale(.98)}
-.promo-banner::before{content:'';position:absolute;top:-50%;right:-20%;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,#ffffff50,transparent 70%);pointer-events:none}
-.promo-banner .badge{display:inline-flex;align-items:center;gap:6px;background:#03101e;color:#FFC857;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
-.promo-banner .badge svg{width:12px;height:12px}
-.promo-banner .titulo{font-size:17px;font-weight:800;line-height:1.25;letter-spacing:-.3px;position:relative;z-index:1}
-.promo-banner .sub{font-size:12px;opacity:.75;margin-top:6px;font-weight:600}
-.promo-banner .cta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;position:relative;z-index:1}
-
-.cashback-mini{margin:0 20px 16px;padding:16px 20px;border-radius:18px;background:linear-gradient(135deg,#A78BFA20,#00E67620);border:1px solid #A78BFA40;display:flex;align-items:center;gap:14px}
+.cashback-mini{margin:0 20px 16px;padding:16px 20px;border-radius:18px;background:linear-gradient(135deg,#A78BFA20,#00E67620);border:1px solid #A78BFA40;display:flex;align-items:center;gap:14px;cursor:pointer;transition:.15s}
+.cashback-mini:active{transform:scale(.98)}
 .cashback-mini .ico{width:44px;height:44px;border-radius:14px;flex-shrink:0;background:linear-gradient(135deg,#A78BFA,#00E676);display:flex;align-items:center;justify-content:center;color:var(--navy-900)}
 .cashback-mini .ico svg{width:22px;height:22px}
 .cashback-mini .info{flex:1}
@@ -434,32 +308,26 @@ svg{display:block}
 .pix-success .detalhes .row.bonus .v{color:var(--yellow)}
 .pix-success .detalhes .row.total{border-top:1px solid #ffffff15;padding-top:10px;margin-top:6px}
 .pix-success .detalhes .row.total .v{color:var(--cyan);font-size:16px;font-weight:800}
+@keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
 
-<!-- ==================== SPLASH PREMIUM ==================== -->
+<!-- ==================== SPLASH ==================== -->
 <div id="splash">
-  <div class="splash-particles">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-  </div>
-
+  <div class="splash-particles"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="splash-core">
     <div style="position:relative">
       <div class="splash-ring"></div>
       <div class="splash-ring"></div>
       <div class="splash-logo">
-        <svg viewBox="0 0 24 24" fill="#03101e">
-          <path d="M4 4L12 20L20 4" stroke="#03101e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <svg viewBox="0 0 24 24"><path d="M4 4L12 20L20 4" stroke="#03101e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       </div>
     </div>
-
     <div class="splash-title">VISION</div>
     <div class="splash-line"></div>
     <div class="splash-sub">Sistema de pagamento inteligente</div>
   </div>
-
   <div class="splash-loader"></div>
   <div class="splash-version">v2.0 · Seguro · Rápido · Confiável</div>
 </div>
@@ -468,43 +336,22 @@ svg{display:block}
 <div class="screen" id="screen-login">
   <div class="auth-screen">
     <div class="auth-top">
-      <div class="auth-logo">
-        <svg viewBox="0 0 24 24"><path d="M4 4L12 20L20 4" stroke="#03101e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-      </div>
+      <div class="auth-logo"><svg viewBox="0 0 24 24"><path d="M4 4L12 20L20 4" stroke="#03101e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
       <div class="auth-title">Bem-vindo</div>
       <div class="auth-sub">Sistema de pagamento inteligente</div>
     </div>
     <div class="auth-form">
       <div class="input-group">
         <label class="input-label">CPF ou WhatsApp</label>
-        <div class="input-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 10h20"/></svg>
-          <input id="login-id" type="text" placeholder="000.000.000-00" inputmode="numeric">
-        </div>
+        <div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 10h20"/></svg><input id="login-id" type="text" placeholder="000.000.000-00" inputmode="numeric"></div>
       </div>
       <div class="input-group">
         <label class="input-label">Senha</label>
-        <div class="input-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-          <input id="login-senha" type="password" placeholder="••••••••">
-          <button class="input-toggle" onclick="togglePwd('login-senha',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        </div>
+        <div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="login-senha" type="password" placeholder="••••••••"><button class="input-toggle" onclick="togglePwd('login-senha',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
       </div>
-
-      <button class="btn btn-primary" style="margin-top:8px" onclick="fazerLogin()">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
-        Entrar
-      </button>
-
-      <button class="btn btn-secondary" style="margin-top:10px" onclick="abrirCadastro()">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-        Criar conta
-      </button>
-
-      <div class="auth-footer">
-        Esqueceu a senha? <a onclick="abrirRecuperar()">Recuperar acesso</a>
-      </div>
-
+      <button class="btn btn-primary" style="margin-top:8px" onclick="fazerLogin()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>Entrar</button>
+      <button class="btn btn-secondary" style="margin-top:10px" onclick="abrirCadastro()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>Criar conta</button>
+      <div class="auth-footer">Esqueceu a senha? <a onclick="abrirRecuperar()">Recuperar acesso</a></div>
       <div class="debug-box" id="debug-login"></div>
     </div>
   </div>
@@ -514,10 +361,7 @@ svg{display:block}
 <div class="modal-overlay" id="modal-cadastro">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-head">
-      <h2>Criar conta</h2>
-      <button class="modal-close" onclick="fecharModal('modal-cadastro')"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-    </div>
+    <div class="modal-head"><h2>Criar conta</h2><button class="modal-close" onclick="fecharModal('modal-cadastro')"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
     <div class="modal-body">
       <div class="input-group"><label class="input-label">Nome completo</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 4-7 8-7s8 3 8 7"/></svg><input id="cad-nome" placeholder="João da Silva"></div></div>
       <div class="input-group"><label class="input-label">CPF</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4M7 11h6"/></svg><input id="cad-cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14"></div></div>
@@ -533,24 +377,11 @@ svg{display:block}
 <div class="modal-overlay" id="modal-recuperar">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-head">
-      <h2>Recuperar acesso</h2>
-      <button class="modal-close" onclick="fecharModal('modal-recuperar')"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-    </div>
+    <div class="modal-head"><h2>Recuperar acesso</h2><button class="modal-close" onclick="fecharModal('modal-recuperar')"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
     <div class="modal-body">
-      <div class="modal-text">
-        Se você esqueceu a senha, precisamos resetar manualmente.<br><br>
-        <strong>Entre em contato:</strong><br>
-        📱 WhatsApp: (88) 99247-7625
-      </div>
-      <div class="input-group">
-        <label class="input-label">Digite seu CPF ou WhatsApp</label>
-        <div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 10h20"/></svg><input id="rec-id" placeholder="000.000.000-00" inputmode="numeric"></div>
-      </div>
-      <button class="btn btn-primary" style="margin-top:8px" onclick="pedirRecuperacao()">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        Enviar pedido
-      </button>
+      <div class="modal-text">Se esqueceu a senha, precisamos resetar manualmente.<br><br><strong>Contato:</strong><br>📱 WhatsApp: (88) 99247-7625</div>
+      <div class="input-group"><label class="input-label">CPF ou WhatsApp</label><div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 10h20"/></svg><input id="rec-id" placeholder="000.000.000-00" inputmode="numeric"></div></div>
+      <button class="btn btn-primary" style="margin-top:8px" onclick="pedirRecuperacao()">Enviar pelo WhatsApp</button>
     </div>
   </div>
 </div>
@@ -564,7 +395,7 @@ svg{display:block}
     </div>
     <div><button class="icon-btn" onclick="toast('Nenhuma notificação')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button></div>
   </div>
-  <div id="home-promo-container"></div>
+  <div id="home-carousel-container"></div>
   <div class="balance-card">
     <div class="bal-top">
       <div class="bal-label">Saldo disponível</div>
@@ -595,7 +426,7 @@ svg{display:block}
     <button class="back-btn" onclick="irPara('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
     <h1>Adicionar saldo</h1>
   </div>
-  <div id="rec-promo-container"></div>
+  <div id="rec-carousel-container"></div>
   <div class="section" style="padding-top:0">
     <div class="amount-grid" id="amount-grid">
       <button class="amount-card" data-v="2.50" onclick="selRecarga(this, event)"><div class="v">R$ 2,50</div><div class="s">1 crédito</div></button>
@@ -742,33 +573,31 @@ const auth = getAuth(app);
 const BACKEND_URL = "https://vision-agua-backend.onrender.com";
 const WHATSAPP_SUPORTE = "5588992477625";
 
-let usuarioAtual = null, dadosCliente = null, unsubscribeCliente = null, unsubscribePromos = null;
+let usuarioAtual = null, dadosCliente = null, unsubscribeCliente = null, unsubscribePromos = null, unsubscribeBanners = null;
 let filtroAtual = 'todos', recargaSelecionada = 0, saldoVisivel = true, menuAberto = false;
 let pixAtual = null, pixInterval = null, pixExpiraEm = 0;
 let promocaoAtiva = null, configCashback = null, previewAtual = null;
 let tentativasLogin = 0;
 
+// Carrossel
+let bannersAtivos = [];
+let carouselIdx = 0;
+let carouselTimer = null;
+let carouselTouchStart = 0;
+let carouselTouchDelta = 0;
+
 const ICON_IN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>';
 const ICON_OUT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
 const ICON_GIFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>';
 
-// Splash
 setTimeout(()=>{
   document.getElementById('splash').classList.add('hide');
   setTimeout(()=>document.getElementById('splash').style.display='none',800);
 }, 2800);
 
-// ============ NORMALIZAÇÃO (correção do bug de login) ============
-function normalizar(id){
-  return String(id || '').replace(/\D/g, '');  // só dígitos
-}
+function normalizar(id){ return String(id || '').replace(/\D/g, ''); }
+function cpfParaEmail(id){ return normalizar(id) + '@visionagua.app'; }
 
-function cpfParaEmail(id){
-  const digits = normalizar(id);
-  return digits + '@visionagua.app';
-}
-
-// ============ NAVEGAÇÃO ============
 window.irPara = function(tela){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const el = document.getElementById('screen-'+tela);
@@ -777,7 +606,7 @@ window.irPara = function(tela){
   const nav = document.querySelector(`.nav-item[data-tab="${tela}"]`);
   if(nav) nav.classList.add('active');
   window.scrollTo(0,0); fecharMenu();
-  if(tela === 'recarga') atualizarPreview();
+  if(tela === 'recarga'){ atualizarPreview(); }
   if(tela === 'cashback') renderCashback();
 };
 
@@ -797,7 +626,6 @@ window.showLoading = (msg)=> { document.getElementById('loading-txt').innerText 
 window.hideLoading = ()=> document.getElementById('loading').classList.remove('active');
 window.fecharModal = (id)=> document.getElementById(id).classList.remove('active');
 
-// Máscaras
 const maskCPF = v => v.replace(/\D/g,'').slice(0,11).replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
 const maskPhone = v => v.replace(/\D/g,'').slice(0,11).replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2');
 document.getElementById('cad-cpf').addEventListener('input', e=> e.target.value = maskCPF(e.target.value));
@@ -812,7 +640,6 @@ window.togglePwd = function(id, btn){
   btn.innerHTML = isPwd ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 };
 
-// ============ CADASTRO ============
 window.abrirCadastro = ()=> document.getElementById('modal-cadastro').classList.add('active');
 
 window.criarConta = async function(){
@@ -831,40 +658,25 @@ window.criarConta = async function(){
   try {
     const email = cpfParaEmail(cpf);
     const cred = await createUserWithEmailAndPassword(auth, email, senha);
-    await set(ref(db, 'clientes/' + cred.user.uid), {
-      nome, cpf, whatsapp: whats, endereco, saldo: 0,
-      criado_em: Math.floor(Date.now()/1000),
-      ativo: true
-    });
+    await set(ref(db, 'clientes/' + cred.user.uid), { nome, cpf, whatsapp: whats, endereco, saldo: 0, criado_em: Math.floor(Date.now()/1000), ativo: true });
     fecharModal('modal-cadastro');
     toast('Conta criada com sucesso!','success');
   } catch(e){
     let msg = 'Erro ao criar conta';
-    if(e.code === 'auth/email-already-in-use') msg = 'Este CPF já está cadastrado. Faça login.';
+    if(e.code === 'auth/email-already-in-use') msg = 'Este CPF já está cadastrado';
     else if(e.code === 'auth/weak-password') msg = 'Senha muito fraca';
-    else if(e.code === 'auth/invalid-email') msg = 'CPF inválido (formato)';
     toast(msg,'error');
-    console.error('Erro cadastro:', e.code, e.message);
   } finally { hideLoading(); }
 };
 
-// ============ LOGIN (com debug e correção) ============
 window.fazerLogin = async function(){
   const idInput = document.getElementById('login-id').value.trim();
   const senha = document.getElementById('login-senha').value;
   const debugBox = document.getElementById('debug-login');
-
-  if(!idInput || !senha){
-    return toast('Preencha todos os campos','error');
-  }
-
+  if(!idInput || !senha) return toast('Preencha todos os campos','error');
   const digits = normalizar(idInput);
-  if(digits.length < 10){
-    return toast('Digite um CPF (11) ou WhatsApp (10-11) válido','error');
-  }
-
+  if(digits.length < 10) return toast('Digite CPF ou WhatsApp válido','error');
   const email = cpfParaEmail(idInput);
-  console.log('🔐 Tentando login:', { idInput, digits, email, senhaLength: senha.length });
 
   showLoading('Entrando...');
   try {
@@ -874,46 +686,21 @@ window.fazerLogin = async function(){
     toast('Bem-vindo!','success');
   } catch(e){
     tentativasLogin++;
-    console.error('Erro login:', e.code, e.message);
-
     let msg = 'Erro ao entrar';
     let dica = '';
-
-    if(e.code === 'auth/user-not-found'){
-      msg = 'Conta não encontrada';
-      dica = 'Este CPF/WhatsApp não tem cadastro. Clique em "Criar conta" abaixo.';
-    } else if(e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential'){
-      msg = 'Senha incorreta';
-      dica = 'Confira a senha. Se esqueceu, use "Recuperar acesso".';
-    } else if(e.code === 'auth/invalid-email'){
-      msg = 'Formato inválido';
-      dica = 'Digite só números no campo de CPF/WhatsApp.';
-    } else if(e.code === 'auth/too-many-requests'){
-      msg = 'Muitas tentativas';
-      dica = 'Aguarde 1 minuto e tente novamente.';
-    } else if(e.code === 'auth/network-request-failed'){
-      msg = 'Sem internet';
-      dica = 'Verifique sua conexão.';
-    }
-
+    if(e.code === 'auth/user-not-found'){ msg = 'Conta não encontrada'; dica = 'Este CPF/WhatsApp não tem cadastro.'; }
+    else if(e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential'){ msg = 'Senha incorreta'; dica = 'Confira a senha ou use Recuperar acesso.'; }
+    else if(e.code === 'auth/too-many-requests'){ msg = 'Muitas tentativas'; dica = 'Aguarde 1 minuto.'; }
     toast(msg,'error');
-
-    // Mostra debug após 2 tentativas
     if(tentativasLogin >= 2){
-      debugBox.innerHTML = `
-        <strong>🔍 Diagnóstico</strong><br>
-        E-mail tentado: <span style="color:var(--cyan)">${email}</span><br>
-        CPF/WhatsApp digitado: <span style="color:var(--cyan)">${digits}</span><br>
-        Erro: <span style="color:var(--red)">${e.code}</span><br><br>
-        <span style="color:var(--txt-2)">💡 ${dica}</span>
-      `;
+      debugBox.innerHTML = `<strong>🔍 Diagnóstico</strong><br>E-mail: <span style="color:var(--cyan)">${email}</span><br>Erro: <span style="color:var(--red)">${e.code}</span><br><br><span style="color:var(--text-2)">💡 ${dica}</span>`;
       debugBox.classList.add('show');
     }
   } finally { hideLoading(); }
 };
 
 window.sair = async function(){
-  fecharMenu(); pararPixPolling();
+  fecharMenu(); pararPixPolling(); pararCarrossel();
   if(!confirm('Deseja sair da conta?')) return;
   showLoading('Saindo...');
   try { await signOut(auth); toast('Até logo!','success'); }
@@ -931,16 +718,113 @@ window.pedirRecuperacao = function(){
   fecharModal('modal-recuperar');
 };
 
-// ============ AUTH STATE ============
+// ==================== CARROSSEL ====================
+function iniciarCarrossel(){
+  if(unsubscribeBanners) unsubscribeBanners();
+  unsubscribeBanners = onValue(ref(db,'banners'), snap=>{
+    const data = snap.val() || {};
+    bannersAtivos = Object.entries(data)
+      .map(([id,b])=>({id,...b}))
+      .filter(b=> b.ativo !== false && b.url)
+      .sort((a,b)=>(a.ordem||a.criado_em||0)-(b.ordem||b.criado_em||0));
+    renderCarrossel();
+  });
+}
+
+function pararCarrossel(){
+  if(carouselTimer){ clearInterval(carouselTimer); carouselTimer = null; }
+}
+
+function renderCarrossel(){
+  const homeC = document.getElementById('home-carousel-container');
+  const recC = document.getElementById('rec-carousel-container');
+
+  if(bannersAtivos.length === 0){
+    if(homeC) homeC.innerHTML = '';
+    if(recC) recC.innerHTML = '';
+    pararCarrossel();
+    return;
+  }
+
+  const html = `
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="carousel-track">
+        ${bannersAtivos.map(b=>`<div class="carousel-slide"><img src="${b.url}" alt="banner" loading="lazy"></div>`).join('')}
+      </div>
+      ${bannersAtivos.length > 1 ? `
+        <div class="carousel-nav prev" onclick="carouselPrev()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></div>
+        <div class="carousel-nav next" onclick="carouselNext()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></div>
+        <div class="carousel-dots" id="carousel-dots">
+          ${bannersAtivos.map((_,i)=>`<div class="carousel-dot ${i===0?'active':''}" onclick="irParaSlide(${i})"></div>`).join('')}
+        </div>
+      ` : ''}
+    </div>
+  `;
+
+  if(homeC) homeC.innerHTML = html;
+  if(recC) recC.innerHTML = bannersAtivos.length > 0 ? html : '';
+
+  carouselIdx = 0;
+  setTimeout(()=>{
+    const el = document.getElementById('carousel-track');
+    if(el) configurarSwipe(el);
+  }, 50);
+
+  iniciarAutoPlay();
+}
+
+function iniciarAutoPlay(){
+  pararCarrossel();
+  if(bannersAtivos.length <= 1) return;
+  carouselTimer = setInterval(()=>{ carouselNext(); }, 4000);
+}
+
+window.carouselNext = function(){
+  carouselIdx = (carouselIdx + 1) % bannersAtivos.length;
+  atualizarSlide();
+  iniciarAutoPlay();
+};
+
+window.carouselPrev = function(){
+  carouselIdx = (carouselIdx - 1 + bannersAtivos.length) % bannersAtivos.length;
+  atualizarSlide();
+  iniciarAutoPlay();
+};
+
+window.irParaSlide = function(i){
+  carouselIdx = i;
+  atualizarSlide();
+  iniciarAutoPlay();
+};
+
+function atualizarSlide(){
+  const track = document.getElementById('carousel-track');
+  if(!track) return;
+  track.style.transform = `translateX(-${carouselIdx * 100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>{
+    d.classList.toggle('active', i === carouselIdx);
+  });
+}
+
+function configurarSwipe(el){
+  el.addEventListener('touchstart', e=>{ carouselTouchStart = e.touches[0].clientX; carouselTouchDelta = 0; }, {passive:true});
+  el.addEventListener('touchmove', e=>{ carouselTouchDelta = e.touches[0].clientX - carouselTouchStart; }, {passive:true});
+  el.addEventListener('touchend', ()=>{
+    if(Math.abs(carouselTouchDelta) > 50){
+      if(carouselTouchDelta > 0) window.carouselPrev();
+      else window.carouselNext();
+    }
+    carouselTouchDelta = 0;
+  });
+}
+
+// ==================== AUTH STATE ====================
 onAuthStateChanged(auth, async (user)=>{
   if(user){
     usuarioAtual = user;
     if(unsubscribeCliente) unsubscribeCliente();
     unsubscribeCliente = onValue(ref(db,'clientes/'+user.uid), snap=>{
-      if(!snap.exists()){
-        console.warn('⚠️ Usuário existe no Auth mas não no /clientes');
-        return;
-      }
+      if(!snap.exists()) return;
       dadosCliente = snap.val();
       atualizarUI();
     });
@@ -957,28 +841,26 @@ onAuthStateChanged(auth, async (user)=>{
           promocaoAtiva = { id, ...p };
         }
       }
-      renderPromos();
-    });
-    onValue(ref(db,'config/cashback_padrao'), snap=>{
-      configCashback = snap.val() || null;
-      renderPromos();
       atualizarPreview();
     });
+    onValue(ref(db,'config/cashback_padrao'), snap=>{ configCashback = snap.val() || null; atualizarPreview(); });
+    iniciarCarrossel();
     document.getElementById('bottom-nav').style.display = 'flex';
     irPara('home');
   } else {
     usuarioAtual = null; dadosCliente = null;
     if(unsubscribeCliente){ unsubscribeCliente(); unsubscribeCliente = null; }
     if(unsubscribePromos){ unsubscribePromos(); unsubscribePromos = null; }
+    if(unsubscribeBanners){ unsubscribeBanners(); unsubscribeBanners = null; }
     document.getElementById('bottom-nav').style.display = 'none';
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById('screen-login').classList.add('active');
     document.getElementById('login-senha').value = '';
-    fecharMenu(); pararPixPolling();
+    fecharMenu(); pararPixPolling(); pararCarrossel();
   }
 });
 
-// ============ UI ============
+// ==================== UI ====================
 window.toggleSaldo = function(btn){
   saldoVisivel = !saldoVisivel; renderSaldo();
   btn.innerHTML = saldoVisivel ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>';
@@ -1010,6 +892,18 @@ function atualizarUI(){
   document.getElementById('menu-nome').innerText = nome;
   document.getElementById('menu-cpf').innerText = 'CPF: ' + (dadosCliente.cpf||'—');
   renderSaldo(); renderStats(); renderHome(); renderExtrato(); renderCashback();
+  renderCashbackMini();
+}
+
+function renderCashbackMini(){
+  const cont = document.getElementById('home-cashback-container');
+  if(!cont || !dadosCliente) return;
+  const total = Number(dadosCliente.stats?.total_cashback_recebido || 0);
+  if(total > 0 || configCashback?.ativo){
+    cont.innerHTML = `<div class="cashback-mini" onclick="irPara('cashback')"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="info"><div class="lbl">Cashback acumulado</div><div class="val">R$ ${total.toFixed(2).replace('.',',')}</div></div><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--text-3)"><path d="M9 18l6-6-6-6"/></svg></div>`;
+  } else {
+    cont.innerHTML = '';
+  }
 }
 
 function getTransacoes(){
@@ -1081,47 +975,20 @@ function renderCashback(){
   if(histArr.length===0){ list.innerHTML = '<div class="empty"><h4>Sem bônus ainda</h4></div>'; return; }
   list.innerHTML = histArr.slice(0,20).map(h=>{
     const data = h.data ? new Date(h.data*1000).toLocaleDateString('pt-BR') : '—';
-    const totalBonus = Number(h.cashback_padrao||0) + Number(h.cashback_vip||0) + Number(h.bonus_promo||0);
+    const totalBonus = Number(h.cashback_padrao||0) + Number(h.cashback_vip||0) + Number(h.bonus_promo||0) + Number(h.cashback_nivel||0);
     return `<div class="tx-item"><div class="tx-ico gift">${ICON_GIFT}</div><div class="tx-body"><div class="tx-title">Recarga de R$ ${Number(h.valor_recarga||0).toFixed(2)}</div><div class="tx-date">${data}</div></div><div class="tx-amount bonus">+ R$ ${totalBonus.toFixed(2)}<small>bônus</small></div></div>`;
   }).join('');
-}
-
-function renderPromos(){
-  const container = document.getElementById('home-promo-container');
-  const containerRec = document.getElementById('rec-promo-container');
-  const cashContainer = document.getElementById('home-cashback-container');
-
-  let html = '';
-  if(promocaoAtiva){
-    const titulo = promocaoAtiva.titulo || 'Promoção especial';
-    const minimo = Number(promocaoAtiva.valor_minimo || 0);
-    const perc = Number(promocaoAtiva.percentual || 0);
-    let sub = '';
-    if(promocaoAtiva.regra === 'bonus_fixo') sub = `Nas recargas acima de R$ ${minimo.toFixed(2)}`;
-    else if(promocaoAtiva.regra === 'percentual') sub = `Ganhe ${perc}% de bônus`;
-    else if(promocaoAtiva.regra === 'multiplicador') sub = `Saldo multiplicado`;
-    html = `<div class="promo-banner" onclick="irPara('recarga')"><div class="badge">${ICON_GIFT} PROMOÇÃO ATIVA</div><div class="titulo">${titulo}</div><div class="sub">${sub}</div><div class="cta">Aproveitar →</div></div>`;
-  }
-  if(container) container.innerHTML = html;
-  if(containerRec) containerRec.innerHTML = html;
-
-  // Card de cashback acumulado
-  if(cashContainer && dadosCliente){
-    const total = Number(dadosCliente.stats?.total_cashback_recebido || 0);
-    if(total > 0 || configCashback?.ativo){
-      cashContainer.innerHTML = `<div class="cashback-mini" onclick="irPara('cashback')"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="info"><div class="lbl">Cashback acumulado</div><div class="val">R$ ${total.toFixed(2).replace('.',',')}</div></div><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--txt-3)"><path d="M9 18l6-6-6-6"/></svg></div>`;
-    } else {
-      cashContainer.innerHTML = '';
-    }
-  }
 }
 
 async function atualizarPreview(){
   if(!usuarioAtual || !recargaSelecionada || recargaSelecionada < 2.50){
     previewAtual = null;
-    document.getElementById('rec-valor-pagar').innerText = 'R$ 0,00';
-    document.getElementById('rec-valor-receber').innerText = 'R$ 0,00';
-    document.getElementById('rec-preview-bonus').innerHTML = '';
+    const el1 = document.getElementById('rec-valor-pagar');
+    const el2 = document.getElementById('rec-valor-receber');
+    const el3 = document.getElementById('rec-preview-bonus');
+    if(el1) el1.innerText = 'R$ 0,00';
+    if(el2) el2.innerText = 'R$ 0,00';
+    if(el3) el3.innerHTML = '';
     return;
   }
   document.getElementById('rec-valor-pagar').innerText = 'R$ ' + recargaSelecionada.toFixed(2).replace('.',',');
@@ -1134,7 +1001,7 @@ async function atualizarPreview(){
     const total = Number(data.total_receber || recargaSelecionada);
     let bonusHTML = '';
     if(bonus > 0){
-      bonusHTML = `${data.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${data.cashback_padrao.toFixed(2)}</span></div>` : ''}${data.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ Cashback VIP</span><span class="v">+ R$ ${data.cashback_vip.toFixed(2)}</span></div>` : ''}${data.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${data.promo_titulo || 'Bônus'}</span><span class="v">+ R$ ${data.bonus_promo.toFixed(2)}</span></div>` : ''}`;
+      bonusHTML = `${data.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${data.cashback_padrao.toFixed(2)}</span></div>` : ''}${data.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ Cashback VIP</span><span class="v">+ R$ ${data.cashback_vip.toFixed(2)}</span></div>` : ''}${data.cashback_nivel > 0 ? `<div class="row bonus"><span class="k">🏆 ${data.nivel_aplicado||'Nível'}</span><span class="v">+ R$ ${data.cashback_nivel.toFixed(2)}</span></div>` : ''}${data.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${data.promo_titulo || 'Bônus'}</span><span class="v">+ R$ ${data.bonus_promo.toFixed(2)}</span></div>` : ''}`;
     }
     document.getElementById('rec-preview-bonus').innerHTML = bonusHTML;
     document.getElementById('rec-valor-receber').innerText = 'R$ ' + total.toFixed(2).replace('.',',');
@@ -1154,10 +1021,11 @@ window.verDetalheTx = function(t){
   const dateStr = t.data ? new Date(t.data*1000).toLocaleString('pt-BR') : '—';
   let rowsHTML = `<div class="tx-row"><span class="k">Data</span><span class="v">${dateStr}</span></div><div class="tx-row"><span class="k">Tipo</span><span class="v">${isIn?'Crédito':'Débito'}</span></div>`;
   if(isIn){
-    const vp = Number(t.valor||0), cp = Number(t.cashback_padrao||0), cv = Number(t.cashback_vip||0), bp = Number(t.bonus_promo||0);
+    const vp = Number(t.valor||0), cp = Number(t.cashback_padrao||0), cv = Number(t.cashback_vip||0), cn = Number(t.cashback_nivel||0), bp = Number(t.bonus_promo||0);
     rowsHTML += `<div class="tx-row"><span class="k">Valor pago</span><span class="v">R$ ${vp.toFixed(2)}</span></div>`;
     if(cp > 0) rowsHTML += `<div class="tx-row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${cp.toFixed(2)}</span></div>`;
     if(cv > 0) rowsHTML += `<div class="tx-row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${cv.toFixed(2)}</span></div>`;
+    if(cn > 0) rowsHTML += `<div class="tx-row bonus"><span class="k">🏆 ${t.nivel_aplicado||'Nível'}</span><span class="v">+ R$ ${cn.toFixed(2)}</span></div>`;
     if(bp > 0) rowsHTML += `<div class="tx-row bonus"><span class="k">🎁 ${t.promo_titulo||'Promoção'}</span><span class="v">+ R$ ${bp.toFixed(2)}</span></div>`;
     rowsHTML += `<div class="tx-row" style="font-weight:800;border-top:2px solid #ffffff20;margin-top:8px;padding-top:12px"><span class="k">Total</span><span class="v" style="color:var(--cyan)">R$ ${Number(t.total||0).toFixed(2)}</span></div>`;
   } else {
@@ -1171,7 +1039,7 @@ window.fecharModalTx = ()=> document.getElementById('modal-tx').classList.remove
 
 window.selRecarga = function(el, ev){ if(ev) ev.preventDefault(); document.querySelectorAll('.amount-card').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); recargaSelecionada = parseFloat(el.dataset.v); document.getElementById('rec-custom').value = ''; atualizarPreview(); };
 
-// ============ PIX ============
+// ==================== PIX ====================
 window.gerarPix = async function(){
   if(recargaSelecionada < 2.50) return toast('Escolha um valor (mínimo R$ 2,50)','error');
   if(!usuarioAtual || !dadosCliente) return toast('Faça login primeiro','error');
@@ -1193,7 +1061,7 @@ function abrirModalPix(pix){
   const total = Number(preview.total_receber || pix.valor);
   let previewHTML = '';
   if(preview.bonus_total > 0){
-    previewHTML = `<div class="pix-preview-box"><div class="row"><span class="k">Você paga</span><span class="v">R$ ${Number(preview.valor_pago).toFixed(2)}</span></div>${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}<div class="row total"><span class="k">Vai receber</span><span class="v">R$ ${total.toFixed(2)}</span></div></div>`;
+    previewHTML = `<div class="pix-preview-box"><div class="row"><span class="k">Você paga</span><span class="v">R$ ${Number(preview.valor_pago).toFixed(2)}</span></div>${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}${preview.cashback_nivel > 0 ? `<div class="row bonus"><span class="k">🏆 ${preview.nivel_aplicado||'Nível'}</span><span class="v">+ R$ ${Number(preview.cashback_nivel).toFixed(2)}</span></div>` : ''}${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}<div class="row total"><span class="k">Vai receber</span><span class="v">R$ ${total.toFixed(2)}</span></div></div>`;
   }
   cont.innerHTML = `<div class="pix-box"><div class="pix-status-badge"><div class="dot"></div> AGUARDANDO PAGAMENTO</div>${previewHTML}<div class="pix-qr-wrap"><img src="data:image/png;base64,${pix.qr_code_base64}" alt="QR PIX"></div><div style="font-size:13px;color:var(--text-2);margin-bottom:8px">Ou copie o código:</div><div class="pix-code" id="pix-code-text">${pix.qr_code}</div><button class="btn btn-primary" onclick="copiarPix()">Copiar código PIX</button><div class="pix-timer" style="margin-top:16px"><div class="dot"></div><span id="pix-timer-txt">Aguardando...</span></div></div>`;
   document.getElementById('modal-pix').classList.add('active');
@@ -1236,7 +1104,7 @@ function mostrarSucessoPix(pix){
   const total = Number(preview.total_receber || pix.valor);
   let detalhesHTML = '';
   if(bonus > 0){
-    detalhesHTML = `<div class="detalhes"><div class="row"><span class="k">Valor pago</span><span class="v">R$ ${valorPago.toFixed(2)}</span></div>${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}<div class="row total"><span class="k">Total</span><span class="v">R$ ${total.toFixed(2)}</span></div></div>`;
+    detalhesHTML = `<div class="detalhes"><div class="row"><span class="k">Valor pago</span><span class="v">R$ ${valorPago.toFixed(2)}</span></div>${preview.cashback_padrao > 0 ? `<div class="row bonus"><span class="k">💰 Cashback</span><span class="v">+ R$ ${Number(preview.cashback_padrao).toFixed(2)}</span></div>` : ''}${preview.cashback_vip > 0 ? `<div class="row bonus"><span class="k">⭐ VIP</span><span class="v">+ R$ ${Number(preview.cashback_vip).toFixed(2)}</span></div>` : ''}${preview.cashback_nivel > 0 ? `<div class="row bonus"><span class="k">🏆 ${preview.nivel_aplicado||'Nível'}</span><span class="v">+ R$ ${Number(preview.cashback_nivel).toFixed(2)}</span></div>` : ''}${preview.bonus_promo > 0 ? `<div class="row bonus"><span class="k">🎁 ${preview.promo_titulo||'Bônus'}</span><span class="v">+ R$ ${Number(preview.bonus_promo).toFixed(2)}</span></div>` : ''}<div class="row total"><span class="k">Total</span><span class="v">R$ ${total.toFixed(2)}</span></div></div>`;
   }
   cont.innerHTML = `<div class="pix-success"><div class="pix-success-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></div><h2>Saldo adicionado!</h2><div class="valor">+ R$ ${total.toFixed(2)}</div>${detalhesHTML}<button class="btn btn-primary" onclick="fecharPix()">Entendi</button></div>`;
   if(navigator.vibrate) navigator.vibrate([100,50,100]);
